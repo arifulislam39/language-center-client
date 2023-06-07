@@ -17,7 +17,7 @@ const NavBar = () => {
 
   const navItems = (
     <>
-      <li><Link to="/home">Home</Link></li>
+      <li><Link to="/">Home</Link></li>
       <li><Link to="/instructors">Instructors</Link></li>
       <li><Link to="/classes">Classes</Link></li>
       <li><Link to="/dashboard">Dashboard</Link></li>
@@ -28,7 +28,7 @@ const NavBar = () => {
   );
 
   return (
-   <div className={colorChange ? "bg-[#123821] sticky top-0 z-10": "bg-opacity-30 bg-black z-10 navbar fixed max-w-screen-xl"}>
+   <div className={colorChange ? "bg-[#123821] sticky top-0 z-10": "bg-opacity-10 bg-black z-10 navbar fixed max-w-screen-xl"}>
      <div className="navbar rounded-2xl text-white">
       <div className="navbar-start">
         <div className="dropdown">
