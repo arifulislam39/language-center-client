@@ -1,11 +1,9 @@
 const Footer = () => {
   return (
-    <footer
-      className="footer p-10 rounded-2xl text-base-content bg-[#F8FAFE]">
+    <footer className="bg-[#123821] rounded-2xl text-white">
+      <div className="footer p-10">
       <div>
-        <p className="text-2xl font-bold">
-         LANGUAGE CENTER
-        </p>
+        <p className="text-2xl font-bold">LANGUAGE CENTER</p>
       </div>
       <div>
         <span className="footer-title">Services</span>
@@ -26,6 +24,11 @@ const Footer = () => {
         <a className="link link-hover">Terms of use</a>
         <a className="link link-hover">Privacy policy</a>
         <a className="link link-hover">Cookie policy</a>
+      </div>
+      </div>
+
+      <div className="footer-center pb-6">
+        <p>Copyright © 2023 - All right reserved by LANGUAGE CENTER</p>
       </div>
     </footer>
   );
