@@ -1,18 +1,35 @@
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
+    const [colorChange, setColorchange] = useState(false);
+    const changeNavbarColor = () => {
+        if (window.scrollY >= 80) {
+            setColorchange(true);
+        }
+        else {
+            setColorchange(false);
+        }
+    };
+    window.addEventListener('scroll', changeNavbarColor);
+   
+
   const navItems = (
     <>
       <li><Link to="/home">Home</Link></li>
       <li><Link to="/instructors">Instructors</Link></li>
       <li><Link to="/classes">Classes</Link></li>
       <li><Link to="/dashboard">Dashboard</Link></li>
+      <li><Link to="/login">Login</Link></li>
+      <li><button>LogOut</button></li>
       
     </>
   );
 
   return (
-    <div className="navbar bg-[#123821] rounded-2xl text-white">
+   <div className={colorChange ? "bg-[#123821] sticky top-0 z-10": "bg-opacity-30 bg-black z-10 navbar fixed max-w-screen-xl"}>
+     <div className="navbar rounded-2xl text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -47,6 +64,7 @@ const NavBar = () => {
         <a className="btn">Button</a>
       </div>
     </div>
+   </div>
   );
 };
 
