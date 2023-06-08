@@ -24,8 +24,8 @@ const Registration = () => {
       .then((result) => {
         const createdUser = result.user;
 
-        userProfile(data.name, data.photoURL).then(() => {
-          userProfileUpdate(data.name, data.photoURL)
+        userProfile(data.name, data.photo).then(() => {
+          userProfileUpdate(data.name, data.photo)
         });
 
         console.log(createdUser);

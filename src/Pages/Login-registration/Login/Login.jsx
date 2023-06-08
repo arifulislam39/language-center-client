@@ -1,26 +1,21 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
-
-
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  const [error, setError] = useState("");
 
-  // Input data from user
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(email, password);
-    signIn(email, password)
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
 
@@ -28,14 +23,12 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        const errorForMsg = errorMessage.split(":");
-        setError(errorForMsg[1]);
+        console.log(error);
       });
   };
+
   return (
     <div className="hero min-h-screen bg-[#C1DCDC]">
-      
       <div className="hero-content flex-col lg:flex-row">
         <div className="mr-12 w-1/2">
           <img src="" alt="" />
@@ -43,14 +36,15 @@ const Login = () => {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
             <h1 className="text-3xl font-bold text-center">Login </h1>
-            <p className="text-red-500 mt-5 border-2 border-[#123821]">{error}</p>
-            <form onSubmit={handleLogin}>
+
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="text"
+                  {...register("email")}
                   placeholder="email"
                   className="input input-bordered border-[#123821] border-2"
                   name="email"
@@ -62,6 +56,7 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
+                  {...register("password")}
                   placeholder="password"
                   className="input input-bordered border-[#123821] border-2"
                   name="password"
@@ -81,7 +76,7 @@ const Login = () => {
                 Registration
               </Link>
             </p>
-           <GoogleLogin></GoogleLogin>
+            <GoogleLogin></GoogleLogin>
           </div>
         </div>
       </div>

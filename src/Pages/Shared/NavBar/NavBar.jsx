@@ -1,8 +1,22 @@
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const NavBar = () => {
+
+  const { logOut, user } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  // navBar show after scroll
     const [colorChange, setColorchange] = useState(false);
     const changeNavbarColor = () => {
         if (window.scrollY >= 80) {
@@ -20,9 +34,13 @@ const NavBar = () => {
       <li><Link to="/">Home</Link></li>
       <li><Link to="/instructors">Instructors</Link></li>
       <li><Link to="/classes">Classes</Link></li>
-      <li><Link to="/dashboard">Dashboard</Link></li>
-      <li><Link to="/login">Login</Link></li>
-      <li><button>LogOut</button></li>
+     
+      {
+        user &&  <li><Link to="/dashboard">Dashboard</Link></li>
+      }
+      {user?<li><button onClick={handleLogout}>LogOut</button></li>:<li><Link to="/login">Login</Link></li>
+      }
+      
       
     </>
   );
@@ -61,7 +79,12 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {/* <a className="btn">Button</a> */}
+        {user && (
+          <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
+            <img className="w-16 rounded-full" src={user.photoURL} alt="" />
+          </div>
+        )}
       </div>
     </div>
    </div>
