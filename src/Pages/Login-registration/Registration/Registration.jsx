@@ -1,63 +1,48 @@
-
-
-// import { Link, useNavigate } from "react-router-dom";
-// import { useContext, useState } from "react";
-// import { AuthContext } from "../../Providers/AuthProvider";
-
-import { Link } from "react-router-dom";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import { useForm } from "react-hook-form";
 
 const Registration = () => {
-//   const { createUser, userProfile, userProfileUpdate } =
-//     useContext(AuthContext);
-//   const Navigate = useNavigate();
-//   const [error, setError] = useState("");
+  const { createUser, userProfile, userProfileUpdate } =
+    useContext(AuthContext);
+  const Navigate = useNavigate();
+  //const [error, setError] = useState("");
 
-  //Registration
-//   const handleRegister = (event) => {
-//     event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-//     const form = event.target;
-//     const name = form.name.value;
-//     const email = form.email.value;
-//     const password = form.password.value;
-//     const photo = form.photo.value;
+  const onSubmit = (data) => {
+    console.log(data);
 
-//     console.log(name, email, password, photo);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const createdUser = result.user;
 
-    //pass valid
-    // if ((email, password)) {
-    //   if (password.length < 6) {
-    //     setError("Your password should be at least 6 characters long.");
-    //     return;
-    //   }
+        userProfile(data.name, data.photoURL).then(() => {
+          userProfileUpdate(data.name, data.photoURL)
+        });
 
-      // create user
-//       createUser(email, password)
-//         .then((result) => {
-//           const createdUser = result.user;
+        console.log(createdUser);
 
-//           userProfile(name, photo).then(() => {
-//             userProfileUpdate(name, photo);
-//           });
+        Navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-//           console.log(createdUser);
 
-//           Navigate("/");
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     } else {
-//       setError("Email and password required");
-//       return;
-//     }
-//   };
+  console.log(watch("example")); // watch input value by passing the name of it
+
 
   return (
     <div className="hero min-h-screen bg-[#C1DCDC]">
-    
       <div className="hero-content flex-col lg:flex-row">
         <div className="mr-12 w-1/2">
           <img src="" alt="" />
@@ -65,9 +50,9 @@ const Registration = () => {
         <div className="card mt-28 mb-24 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
             <h1 className="text-3xl font-bold text-center">Registration </h1>
-            <form onSubmit=''>
+            <form onSubmit={handleSubmit(onSubmit)}>
               {/* error message */}
-              {/* <div className="alert alert-error shadow-lg">
+              <div className="alert alert-error shadow-lg">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,16 +67,15 @@ const Registration = () => {
                       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span></span>
                 </div>
-              </div> */}
-              <p className="text-red-600 border-2 border-[#123821]"></p>
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
+                  {...register("name")}
                   placeholder="name"
                   className="input input-bordered border-[#123821] border-2"
                   name="name"
@@ -103,10 +87,14 @@ const Registration = () => {
                 </label>
                 <input
                   type="email"
+                  {...register("email", { required: true })}
                   placeholder="email"
                   className="input input-bordered border-[#123821] border-2"
                   name="email"
-                />
+                />{" "}
+                {errors.email && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -114,12 +102,31 @@ const Registration = () => {
                 </label>
                 <input
                   type="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/,
+                  })}
                   placeholder="password"
                   className="input input-bordered border-[#123821] border-2"
                   name="password"
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one Uppercase one lower case and one
+                    special character.
+                  </p>
+                )}
               </div>
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label className="label">
                   <span className="label-text">Confirm Password</span>
                 </label>
@@ -129,13 +136,13 @@ const Registration = () => {
                   className="input input-bordered border-[#123821] border-2"
                   name="password"
                 />
-              </div>
+              </div> */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo URL</span>
                 </label>
                 <input
-                  type="photo"
+                  type="photo" {...register("photo")}
                   placeholder="photo URL"
                   className="input input-bordered border-[#123821] border-2"
                   name="photo"
@@ -155,7 +162,7 @@ const Registration = () => {
                 Login
               </Link>
             </p>
-           
+            <GoogleLogin></GoogleLogin>
           </div>
         </div>
       </div>

@@ -57,7 +57,7 @@ const Banner = () => {
               controller
             </p>
             <div>
-              <button className="btn btn-outline btn-secondary">
+              <button className="btn bg-[]">
                 Explore More
               </button>
             </div>

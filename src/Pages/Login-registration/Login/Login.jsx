@@ -1,38 +1,38 @@
-// import { useContext, useState } from "react";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../Providers/AuthProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import GoogleLogin from "../GoogleLogin/GoogleLogin";
+
 
 
 const Login = () => {
-  // const {signIn} =useContext(AuthContext);
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const from = location.state?.from?.pathname || "/";
-  // const [error, setError] = useState("");
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  const [error, setError] = useState("");
 
-  //Input data from user
-  // const handleLogin = (event) => {
-  //   event.preventDefault();
-  //   const form = event.target;
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   console.log(email, password);
-  //   signIn(email, password)
-  //     .then((result) => {
-  //       const user = result.user;
+  // Input data from user
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
 
-  //       console.log(user);
-  //       navigate(from, { replace: true });
-  //     })
-  //     .catch((error) => {
-  //       const errorMessage = error.message;
-  //       const errorForMsg = errorMessage.split(":");
-  //       setError(errorForMsg[1]);
-  //     });
-  // };
-
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        const errorForMsg = errorMessage.split(":");
+        setError(errorForMsg[1]);
+      });
+  };
   return (
     <div className="hero min-h-screen bg-[#C1DCDC]">
       
@@ -43,8 +43,8 @@ const Login = () => {
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
             <h1 className="text-3xl font-bold text-center">Login </h1>
-            <p className="text-red-500 mt-5 border-2 border-[#123821]"></p>
-            <form onSubmit=''>
+            <p className="text-red-500 mt-5 border-2 border-[#123821]">{error}</p>
+            <form onSubmit={handleLogin}>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -81,7 +81,7 @@ const Login = () => {
                 Registration
               </Link>
             </p>
-           
+           <GoogleLogin></GoogleLogin>
           </div>
         </div>
       </div>
