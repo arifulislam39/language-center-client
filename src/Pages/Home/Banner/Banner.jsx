@@ -12,7 +12,7 @@ const Banner = () => {
       <div id="slide1" className="carousel-item relative w-full ">
         <img src={banner1} className="w-full rounded-xl" />
 
-        <div className="absolute rounded-xl flex items-center pl-16 h-full top-0 left-0 right-5 bottom-5 bg-gradient-to-r from-[#405e4e] to-[rgba(21, 21, 21, 0) 100%)]">
+        <div className="absolute rounded-xl flex items-center pl-16 h-full top-0 left-0 right-5 bottom-5 hero-overlay bg-opacity-30">
           <div className="text-white space-y-7 w-1/2">
             <h2 className="text-7xl font-bold">LANGUAGE CENTER</h2>
             <h3 className="text-4xl font-bold">
@@ -33,11 +33,11 @@ const Banner = () => {
         <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 bottom-5">
           <a
             href="#slide6"
-            className="btn bg-[#A79132] btn-outline btn-circle mr-10"
+            className="btn bg-[#ccb035] btn-circle mr-10"
           >
             ❮
           </a>
-          <a href="#slide2" className="btn bg-[#A79132] btn-outline btn-circle">
+          <a href="#slide2" className="btn bg-[#ccb035] btn-circle">
             ❯
           </a>
         </div>

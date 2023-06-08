@@ -36,10 +36,9 @@ const NavBar = () => {
       <li><Link to="/classes">Classes</Link></li>
      
       {
-        user &&  <li><Link to="/dashboard">Dashboard</Link></li>
+        user && <><li><Link to="/dashboard">Dashboard</Link></li><li><button onClick={handleLogout}>LogOut</button></li></> 
       }
-      {user?<li><button onClick={handleLogout}>LogOut</button></li>:<li><Link to="/login">Login</Link></li>
-      }
+    
       
       
     </>
@@ -79,12 +78,9 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        {/* <a className="btn">Button</a> */}
-        {user && (
-          <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
+        {user?<div className="tooltip tooltip-bottom" data-tip={user.displayName}>
             <img className="w-16 rounded-full" src={user.photoURL} alt="" />
-          </div>
-        )}
+          </div>:<Link to="/login"><button className="btn bg-[#ccb035]">Login</button></Link>}
       </div>
     </div>
    </div>

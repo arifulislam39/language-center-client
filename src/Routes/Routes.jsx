@@ -5,6 +5,7 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login-registration/Login/Login";
 import Registration from "../Pages/Login-registration/Registration/Registration";
+import Classes from "../Pages/Classes/Classes";
 
  export const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ import Registration from "../Pages/Login-registration/Registration/Registration"
         {
             path:"/registration",
             element:<Registration></Registration>
+        },
+        {
+          path:"/classes",
+          element:<Classes></Classes>
         }
       ]
     },
