@@ -11,6 +11,13 @@ import Dashboard from "../Layout/Dashboard";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import InstructorHome from "../Pages/Dashboard/InstructorHome/InstructorHome";
 import StudentHome from "../Pages/Dashboard/StudentHome/StudentHome";
+import MySelectedClasses from "../Pages/Dashboard/MySelectedClasses/MySelectedClasses";
+import MyEnrolledClasses from "../Pages/Dashboard/MyEnrolledClasses/MyEnrolledClasses";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import AddClass from "../Pages/Dashboard/AddClass/AddClass";
+import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
+import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
+import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 
  export const router = createBrowserRouter([
     {
@@ -55,6 +62,34 @@ import StudentHome from "../Pages/Dashboard/StudentHome/StudentHome";
        {
         path:"studentHome",
         element:<StudentHome></StudentHome>
+       },
+       {
+        path:"mySelectedClasses",
+        element:<MySelectedClasses></MySelectedClasses>
+       },
+       {
+        path:"myEnrolledClasses",
+        element:<MyEnrolledClasses></MyEnrolledClasses>
+       },
+       {
+        path:"paymentHistory",
+        element:<PaymentHistory></PaymentHistory>
+       },
+       {
+        path:"addClass",
+        element:<AddClass></AddClass>
+       },
+       {
+        path:"myClasses",
+        element:<MyClasses></MyClasses>
+       },
+       {
+        path:"manageClasses",
+        element:<ManageClasses></ManageClasses>
+       },
+       {
+        path:"manageUsers",
+        element:<ManageUsers></ManageUsers>
        }
 
       ]
