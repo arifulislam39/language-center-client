@@ -52,7 +52,7 @@ const Registration = () => {
             <h1 className="text-3xl font-bold text-center">Registration </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* error message */}
-              <div className="alert alert-error shadow-lg">
+              {/* <div className="alert alert-error shadow-lg">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ const Registration = () => {
                     />
                   </svg>
                 </div>
-              </div>
+              </div> */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>

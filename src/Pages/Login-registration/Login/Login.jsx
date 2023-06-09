@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -18,6 +19,18 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
+
+        Swal.fire({
+          title: 'User login successful',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+
+
 
         console.log(user);
         navigate(from, { replace: true });
