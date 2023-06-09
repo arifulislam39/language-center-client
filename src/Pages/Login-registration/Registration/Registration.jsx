@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2'
 
 const Registration = () => {
   const { createUser, userProfile, userProfileUpdate } =
@@ -24,10 +25,39 @@ const Registration = () => {
       .then((result) => {
         const createdUser = result.user;
 
-        userProfile(data.name, data.photo).then(() => {
-          userProfileUpdate(data.name, data.photo)
-        });
+       
 
+        userProfile(data.name, data.photo)
+        .then(() => {
+          userProfileUpdate(data.name, data.photo);
+
+          // user save on the database
+
+          const saveUser = { name: data.name, email: data.email }
+          fetch("http://localhost:5000/users", {
+            method: 'POST',
+            headers:{
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(saveUser)
+          })
+          .then(res => res.json())
+          .then(data =>{
+            if (data.insertedId){
+              
+             // alert msg
+              Swal.fire({
+                title: 'User created successfully.',
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                }
+              })
+            }
+          })
+        });
         console.log(createdUser);
 
         Navigate("/");
