@@ -7,6 +7,10 @@ import Login from "../Pages/Login-registration/Login/Login";
 import Registration from "../Pages/Login-registration/Registration/Registration";
 import Classes from "../Pages/Classes/Classes";
 import Instructors from "../Pages/Instructors/Instructors";
+import Dashboard from "../Layout/Dashboard";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
+import InstructorHome from "../Pages/Dashboard/InstructorHome/InstructorHome";
+import StudentHome from "../Pages/Dashboard/StudentHome/StudentHome";
 
  export const router = createBrowserRouter([
     {
@@ -34,5 +38,25 @@ import Instructors from "../Pages/Instructors/Instructors";
           element:<Instructors></Instructors>
         }
       ]
+      
     },
+    {
+      path:"dashboard",
+      element:<Dashboard></Dashboard>,
+      children:[
+       {
+        path:"adminHome",
+        element:<AdminHome></AdminHome>
+       },
+       {
+        path:"instructorHome",
+        element:<InstructorHome></InstructorHome>
+       },
+       {
+        path:"studentHome",
+        element:<StudentHome></StudentHome>
+       }
+
+      ]
+    }
   ]);

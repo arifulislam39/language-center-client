@@ -5,6 +5,7 @@ const Classes = () => {
     const [classes, setClasses]=useState([])
     console.log(classes);
 
+    //all classes
     useEffect(()=>{
         fetch("/classes.json")
         .then(res=>res.json())

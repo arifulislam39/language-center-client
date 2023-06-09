@@ -31,7 +31,7 @@ const Registration = () => {
         .then(() => {
           userProfileUpdate(data.name, data.photo);
 
-          // user save on the database
+          // user data save on the database
 
           const saveUser = { name: data.name, email: data.email }
           fetch("http://localhost:5000/users", {
@@ -44,7 +44,7 @@ const Registration = () => {
           .then(res => res.json())
           .then(data =>{
             if (data.insertedId){
-              
+
              // alert msg
               Swal.fire({
                 title: 'User created successfully.',
