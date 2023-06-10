@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import useCart from "../../../Hooks/useCart";
 
 const MySelectedClasses = () => {
-    const [cart]=useCart([])
+    const [cart,refetch]=useCart([])
     console.log(cart.length);
 
 
@@ -23,7 +23,7 @@ const MySelectedClasses = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-                            //refetch();
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'Your Class has been deleted.',
