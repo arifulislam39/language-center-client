@@ -15,6 +15,7 @@ const Registration = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -44,9 +45,10 @@ const Registration = () => {
           .then(res => res.json())
           .then(data =>{
             if (data.insertedId){
-
+              reset();
              // alert msg
               Swal.fire({
+               
                 title: 'User created successfully.',
                 showClass: {
                   popup: 'animate__animated animate__fadeInDown'

@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
 
   const onSubmit = (data) => {
@@ -16,7 +16,7 @@ const AddClass = () => {
       price: parseFloat(data.price),
       available_seats: parseInt(data.available_seats),
       instructor_name: data.instructor_name,
-      instructor_email: data.instructor_email,
+      instructor_email: data.instructor_email,status:"pending"
     };
     fetch("http://localhost:5000/classes", {
       method: "POST",
@@ -29,8 +29,9 @@ const AddClass = () => {
       .then((data) => {
         if (data.insertedId) {
           // alert msg
+          reset();
           Swal.fire({
-            title: "User created successfully.",
+            title: "Class Added successfully.",
             showClass: {
               popup: "animate__animated animate__fadeInDown",
             },

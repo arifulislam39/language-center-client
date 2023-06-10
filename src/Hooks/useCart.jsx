@@ -13,6 +13,7 @@ const useCart = () => {
           return res.data;
       }
   })
+  //console.log(cart);
 
   return [cart, refetch]
 

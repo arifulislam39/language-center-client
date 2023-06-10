@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Card = ({ cls }) => {
-  const { class_image, price, class_name, instructor_name, available_seats } = cls;
+  const { class_image, price, class_name, instructor_name,instructor_email, available_seats } = cls;
   console.log(cls);
   const { user } = useContext(AuthContext);
   const Navigate = useNavigate();
@@ -15,7 +15,7 @@ const Card = ({ cls }) => {
       const cartItem = {
         class_image,
         price,
-
+        instructor_email,
         class_name,
         instructor_name,
         available_seats,

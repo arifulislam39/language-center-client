@@ -12,14 +12,14 @@ const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,reset } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
-
+        reset();
         Swal.fire({
           title: 'User login successful',
           showClass: {
