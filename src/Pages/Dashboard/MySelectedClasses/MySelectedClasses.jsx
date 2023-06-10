@@ -42,7 +42,7 @@ const MySelectedClasses = () => {
         <div>
             <h2 className="text-center text-4xl">my selected classes {cart.length}</h2>
             <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+                <table className="table table-zebra w-full">
                     {/* head */}
                     <thead>
                         <tr>
