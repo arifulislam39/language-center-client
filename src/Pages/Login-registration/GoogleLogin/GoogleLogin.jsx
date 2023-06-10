@@ -14,6 +14,19 @@ const GoogleLogin = () => {
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
+        const loggedInUser = result.user;
+
+        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo:loggedInUser.photoURL}
+        fetch('http://localhost:5000/users', {
+          method: 'POST',
+          headers: {
+              'content-type': 'application/json'
+          },
+          body: JSON.stringify(saveUser)
+      }).then(res => res.json())
+      .then(() => {
+          Navigate(from, { replace: true });
+      })
 
 
         Swal.fire({
