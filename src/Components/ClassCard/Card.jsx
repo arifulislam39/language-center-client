@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Card = ({ cls }) => {
-  const { image, price, className, instructorName, availableSeats } = cls;
+  const { class_image, price, class_name, instructor_name, available_seats } = cls;
   console.log(cls);
   const { user } = useContext(AuthContext);
   const Navigate = useNavigate();
@@ -13,12 +13,12 @@ const Card = ({ cls }) => {
     console.log(item);
     if (user && user.email) {
       const cartItem = {
-        image,
+        class_image,
         price,
 
-        className,
-        instructorName,
-        availableSeats,
+        class_name,
+        instructor_name,
+        available_seats,
         email: user.email,
       };
 
@@ -60,14 +60,14 @@ const Card = ({ cls }) => {
 
   return (
     <div>
-      <div className="card w-full bg-base-100 shadow-2xl" key={cls._id}>
+      <div className="card w-full h-[500px] bg-base-100 shadow-2xl" key={cls._id}>
         <figure>
-          <img src={image} alt="Shoes" />
+          <img src={class_image} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{className}</h2>
-          <h2 className="card-title">{instructorName}</h2>
-          <p>{availableSeats}</p>
+          <h2 className="card-title">{class_name}</h2>
+          <h2 className="card-title">{instructor_name}</h2>
+          <p>{available_seats}</p>
           <p>{price}</p>
           <div className="card-actions justify-center">
             <button

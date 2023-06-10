@@ -1,14 +1,53 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
   const { user } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
+
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const saveData = {
+      class_name: data.class_name,
+      class_image: data.class_image,
+      price: parseFloat(data.price),
+      available_seats: parseInt(data.available_seats),
+      instructor_name: data.instructor_name,
+      instructor_email: data.instructor_email,
+    };
+    fetch("http://localhost:5000/classes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(saveData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          // alert msg
+          Swal.fire({
+            title: "User created successfully.",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        }
+      });
+  };
+
   return (
     <div className="max-w-7xl mx-auto">
-        <div className="text-center text-4xl">Add A Class</div>
+      <div className="text-center text-4xl">Add A Class</div>
       {/* <ToastContainer className="lg:text-3xl" />
         <Head title="ADD TOYS"></Head> */}
-      <form onSubmit="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="card-body">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="form-control">
@@ -16,7 +55,8 @@ const AddClass = () => {
                 <span className="label-text">Class Name</span>
               </label>
               <input
-                name="toy_name"
+                name="class_name"
+                {...register("class_name")}
                 type="text"
                 defaultValue=""
                 className="input input-bordered border-[#123821] border-2"
@@ -24,11 +64,12 @@ const AddClass = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Class Image</span>
+                <span className="label-text">Class Image URL</span>
               </label>
               <input
-                name="image"
-                type="file"
+                name="class_image"
+                {...register("class_image")}
+                type="photo"
                 className="input input-bordered border-[#123821] border-2"
               />
             </div>
@@ -38,6 +79,7 @@ const AddClass = () => {
               </label>
               <input
                 name="price"
+                {...register("price")}
                 defaultValue=""
                 type="text"
                 className="input input-bordered border-[#123821] border-2"
@@ -48,7 +90,8 @@ const AddClass = () => {
                 <span className="label-text">Available Seats</span>
               </label>
               <input
-                name="rating"
+                name="available_eats"
+                {...register("available_seats")}
                 type="text"
                 defaultValue=""
                 className="input input-bordered border-[#123821] border-2"
@@ -56,10 +99,11 @@ const AddClass = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Seller Name</span>
+                <span className="label-text">Instructor Name</span>
               </label>
               <input
-                name="seller_name"
+                name="instructor_name"
+                {...register("instructor_name")}
                 type="text"
                 value={user?.displayName}
                 className="input input-bordered border-[#123821] border-2"
@@ -67,10 +111,11 @@ const AddClass = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Seller Email</span>
+                <span className="label-text">Instructor Email</span>
               </label>
               <input
-                name="seller_email"
+                name="instructor_email"
+                {...register("instructor_email")}
                 type="email"
                 value={user?.email}
                 className="input input-bordered border-[#123821] border-2"
