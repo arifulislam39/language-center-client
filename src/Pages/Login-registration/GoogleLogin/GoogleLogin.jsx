@@ -16,7 +16,7 @@ const GoogleLogin = () => {
       .then((result) => {
         const loggedInUser = result.user;
 
-        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo:loggedInUser.photoURL}
+        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo:loggedInUser.photoURL,role:"student"}
         fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {

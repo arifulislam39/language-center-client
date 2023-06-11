@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const MyClasses = () => {
@@ -15,9 +15,13 @@ const MyClasses = () => {
       return res.data;
     },
   });
+
+
   return (
     <div>
+      
       <h2>my classes : {classInfo.length}</h2>
+      
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
           {/* head */}
@@ -61,7 +65,7 @@ const MyClasses = () => {
                 </td>
 
                 <td>
-                  <button className="btn">View Feedback</button>
+                  Feedback
                 </td>
               </tr>
             ))}

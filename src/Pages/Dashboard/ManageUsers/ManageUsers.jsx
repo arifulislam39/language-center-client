@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
 
-    const {data: users = []} = useQuery({
+    const { refetch,data: users = []} = useQuery({
         queryKey: ['users'],
         queryFn: async() => {
             const res = await axios.get('http://localhost:5000/users');
@@ -12,31 +13,56 @@ const ManageUsers = () => {
     });
 
 
-    // const handleMakeAdmin = user =>{
-    //     fetch(`http://localhost:5000/users${user._id}`, {
-    //         method: 'PATCH'
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         if(data.modifiedCount){
-    //             refetch();
-    //             Swal.fire({
-    //                 position: 'top-end',
-    //                 icon: 'success',
-    //                 title: `${user.name} is an Admin Now!`,
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //               })
-    //         }
-    //     })
-    // }
+    const handleMakeAdmin = (user) => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ role: 'admin' }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount) {
+              refetch();
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `${user.name} is an Admin Now!`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+             
+            }
+          });
+      };
+      
+      const handleMakeInstructor = (user) => {
+        fetch(`http://localhost:5000/users/${user._id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ role: 'instructor' }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount) {
+              refetch();
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `${user.name} is an Instructor Now!`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+              
+            }
+          });
+      };
 
-
-
-
-
-   
 
 
 
@@ -51,7 +77,7 @@ const ManageUsers = () => {
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Status</th>
+                            <th>Role</th>
                             <th>Make Instructor</th>
                             <th>Make Admin</th>
                         </tr>
@@ -62,9 +88,13 @@ const ManageUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>Status</td>
-                                <td><button>Make Instructor</button></td>
-                                <td><button>Make Admin</button></td>
+                                <td>{user.role}</td>
+                                <td>{ user.role === 'admin' ? 'admin' :
+                                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600  text-white">Make Admin</button> 
+                                    }</td>
+                               <td>{ user.role === 'admin' ? 'admin' :
+                                    <button onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600  text-white">Make Instructor</button> 
+                                    }</td>
                             </tr>)
                         }
                         
