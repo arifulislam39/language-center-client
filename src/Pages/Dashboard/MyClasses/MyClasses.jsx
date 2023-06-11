@@ -16,13 +16,25 @@ const MyClasses = () => {
     },
   });
 
-  const modalRef = useRef(null);
+  //view Feedback Modal
+  const ViewFeedbackModalRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const openModal = (item) => {
+  const ViewFeedbackOpenModal = (item) => {
     setSelectedItem(item);
-    if (modalRef.current) {
-      modalRef.current.showModal();
+    if (ViewFeedbackModalRef.current) {
+      ViewFeedbackModalRef.current.showModal();
+    }
+  };
+
+  //Update modal
+  const updateModalRef = useRef(null);
+  const [updateItem, setUpdateItem] = useState(null);
+
+  const UpdateOpenModal = (item) => {
+    setUpdateItem(item);
+    if ( updateModalRef.current) {
+      updateModalRef.current.showModal();
     }
   };
 
@@ -69,12 +81,16 @@ const MyClasses = () => {
                 <td>Enroll</td>
 
                 <td>
-                  <button className="btn">Update</button>
+                <div>
+                    <button className="btn" onClick={() => UpdateOpenModal(item)}>
+                      Update
+                    </button>
+                  </div>
                 </td>
 
                 <td>
                   <div>
-                    <button className="btn" onClick={() => openModal(item)}>
+                    <button className="btn" onClick={() => ViewFeedbackOpenModal(item)}>
                       View Feedback
                     </button>
                   </div>
@@ -88,7 +104,7 @@ const MyClasses = () => {
       {/* view Feedback modal */}
       <div>
         {selectedItem && (
-          <dialog ref={modalRef} className="modal" open>
+          <dialog ref={ViewFeedbackModalRef} className="modal" open>
             <form method="dialog" className="modal-box">
               <button
                 htmlFor=""
@@ -106,6 +122,31 @@ const MyClasses = () => {
             </form>
           </dialog>
         )}
+      </div>
+      <div>
+
+        {/* //Update modal */}
+      <div>
+        {updateItem && (
+          <dialog ref={updateModalRef} className="modal" open>
+            <form method="dialog" className="modal-box">
+              <button
+                htmlFor=""
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={() => setUpdateItem(null)}
+              >
+                ✕
+              </button>
+              <h3 className="font-bold text-lg">{updateItem.price}</h3>
+              <p className="py-4">
+                Press ESC key or click on ✕ button to close
+              </p>
+              <p>{updateItem.price}</p>{" "}
+              {/* Display the selected item's feedback */}
+            </form>
+          </dialog>
+        )}
+      </div>
       </div>
     </div>
   );
