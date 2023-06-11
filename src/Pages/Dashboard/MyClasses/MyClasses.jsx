@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: classInfo = [] } = useQuery({
+  const { refetch, data: classInfo = [] } = useQuery({
     queryKey: ["classes", user?.email],
     queryFn: async () => {
       const res = await axios.get(
@@ -28,14 +29,61 @@ const MyClasses = () => {
   };
 
   //Update modal
-  const updateModalRef = useRef(null);
-  const [updateItem, setUpdateItem] = useState(null);
+  const feedbackModalRef = useRef(null);
+  const [item, setFeedback] = useState(null);
 
-  const UpdateOpenModal = (item) => {
-    setUpdateItem(item);
-    if ( updateModalRef.current) {
-      updateModalRef.current.showModal();
+  const FeedbackOpenModal = (item) => {
+    setFeedback(item);
+    if (feedbackModalRef.current) {
+      feedbackModalRef.current.showModal();
     }
+  };
+
+
+  //update class handler
+  const handleUpdateDataSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const class_name = form.class_name.value;
+    const class_image = form.class_image.value;
+    const available_seats_string = form.available_seats.value;
+    const available_seats=parseInt(available_seats_string);
+    const priceString = form.price.value;
+    const price = parseFloat(priceString);
+
+    const update = {
+      class_name,
+      class_image,
+      available_seats,
+      price,
+    };
+
+    console.log(update);
+
+    fetch(`http://localhost:5000/updateClass/${item._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(update),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Class Updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -81,8 +129,11 @@ const MyClasses = () => {
                 <td>Enroll</td>
 
                 <td>
-                <div>
-                    <button className="btn" onClick={() => UpdateOpenModal(item)}>
+                  <div>
+                    <button
+                      className="btn"
+                      onClick={() => FeedbackOpenModal(item)}
+                    >
                       Update
                     </button>
                   </div>
@@ -90,7 +141,10 @@ const MyClasses = () => {
 
                 <td>
                   <div>
-                    <button className="btn" onClick={() => ViewFeedbackOpenModal(item)}>
+                    <button
+                      className="btn"
+                      onClick={() => ViewFeedbackOpenModal(item)}
+                    >
                       View Feedback
                     </button>
                   </div>
@@ -124,29 +178,82 @@ const MyClasses = () => {
         )}
       </div>
       <div>
-
         {/* //Update modal */}
-      <div>
-        {updateItem && (
-          <dialog ref={updateModalRef} className="modal" open>
-            <form method="dialog" className="modal-box">
-              <button
-                htmlFor=""
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                onClick={() => setUpdateItem(null)}
+        <div>
+          {item && (
+            <dialog ref={feedbackModalRef} className="modal" open>
+              <form
+                onSubmit={handleUpdateDataSubmit}
+                method="dialog"
+                className="modal-box"
               >
-                ✕
-              </button>
-              <h3 className="font-bold text-lg">{updateItem.price}</h3>
-              <p className="py-4">
-                Press ESC key or click on ✕ button to close
-              </p>
-              <p>{updateItem.price}</p>{" "}
-              {/* Display the selected item's feedback */}
-            </form>
-          </dialog>
-        )}
-      </div>
+                <button
+                  htmlFor=""
+                  className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                  onClick={() => setFeedback(null)}
+                >
+                  ✕
+                </button>
+                <div className="text-center">
+                  {" "}
+                  <h3 className="font-bold text-lg">Update</h3>
+                  <p className="py-4">Class Name: {item.class_name}</p>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Class Name</span>
+                  </label>
+                  <input
+                    name="class_name"
+                    type="text"
+                    defaultValue={item.class_name}
+                    className="input input-bordered input-primary"
+                  />
+                </div>{" "}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Class Image</span>
+                  </label>
+                  <input
+                    name="class_image"
+                    type="photo"
+                    defaultValue={item.class_image}
+                    className="input input-bordered input-primary"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Available Seats</span>
+                  </label>
+                  <input
+                    name="available_seats"
+                    type="text"
+                    defaultValue={item.available_seats}
+                    className="input input-bordered input-primary"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Price</span>
+                  </label>
+                  <input
+                    name="price"
+                    type="text"
+                    defaultValue={item.price}
+                    className="input input-bordered input-primary"
+                  />
+                </div>
+                <div className="form-control mt-6">
+                  <input
+                    className="btn bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
+                    type="submit"
+                    value="login"
+                  />
+                </div>
+              </form>
+            </dialog>
+          )}
+        </div>
       </div>
     </div>
   );
