@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useContext} from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const MyClasses = () => {
@@ -16,12 +16,20 @@ const MyClasses = () => {
     },
   });
 
+  const modalRef = useRef(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const openModal = (item) => {
+    setSelectedItem(item);
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
 
   return (
     <div>
-      
       <h2>my classes : {classInfo.length}</h2>
-      
+
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
           {/* head */}
@@ -65,12 +73,39 @@ const MyClasses = () => {
                 </td>
 
                 <td>
-                  Feedback
+                  <div>
+                    <button className="btn" onClick={() => openModal(item)}>
+                      View Feedback
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* view Feedback modal */}
+      <div>
+        {selectedItem && (
+          <dialog ref={modalRef} className="modal" open>
+            <form method="dialog" className="modal-box">
+              <button
+                htmlFor=""
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                onClick={() => setSelectedItem(null)}
+              >
+                ✕
+              </button>
+              <h3 className="font-bold text-lg">{selectedItem.status}</h3>
+              <p className="py-4">
+                Press ESC key or click on ✕ button to close
+              </p>
+              <p>{selectedItem.feedback}</p>{" "}
+              {/* Display the selected item's feedback */}
+            </form>
+          </dialog>
+        )}
       </div>
     </div>
   );
