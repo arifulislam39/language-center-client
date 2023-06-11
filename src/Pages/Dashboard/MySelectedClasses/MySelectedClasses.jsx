@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import useCart from "../../../Hooks/useCart";
+import { Link } from "react-router-dom";
 
 const MySelectedClasses = () => {
     const [cart,refetch]=useCart([])
@@ -66,22 +67,25 @@ const MySelectedClasses = () => {
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={item.class_image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    {item.className}
+                                    {item.class_name}
                                 </td>
                                 <td>
                                     {item.instructor_name}
                                 </td>
                                 <td className="text-end">${item.price}</td>
                                 <td>
-                                    <button className="btn">Pay</button>
+                               <Link  to={`/dashboard/payment/${item._id}`}><button className="btn">Pay</button></Link>
+                                    
                                    
                                 </td>
                                 <td><button onClick={() => handleDelete(item)} className="btn">Delete</button></td>
+
+                               
                             </tr>)
                         }
 

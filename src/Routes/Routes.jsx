@@ -18,6 +18,7 @@ import AddClass from "../Pages/Dashboard/AddClass/AddClass";
 import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
 import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
  export const router = createBrowserRouter([
     {
@@ -66,6 +67,11 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
        {
         path:"mySelectedClasses",
         element:<MySelectedClasses></MySelectedClasses>
+       },
+       {
+        path:"payment/:id",
+        element:<Payment></Payment>,
+        loader:({params})=>fetch(`http://localhost:5000/cart/${params.id}`),
        },
        {
         path:"myEnrolledClasses",
