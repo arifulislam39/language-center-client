@@ -90,10 +90,10 @@ const ManageUsers = () => {
                                 <td>{user.email}</td>
                                 <td>{user.role}</td>
                                 <td>{ user.role === 'admin' ? 'admin' :
-                                    <button onClick={() => handleMakeAdmin(user)} className="btn btn-ghost bg-orange-600  text-white">Make Admin</button> 
+                                    <button onClick={() => handleMakeAdmin(user)} className="btn ">Make Admin</button> 
                                     }</td>
                                <td>{ user.role === 'admin' ? 'admin' :
-                                    <button onClick={() => handleMakeInstructor(user)} className="btn btn-ghost bg-orange-600  text-white">Make Instructor</button> 
+                                    <button onClick={() => handleMakeInstructor(user)} className="btn">Make Instructor</button> 
                                     }</td>
                             </tr>)
                         }
