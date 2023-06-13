@@ -26,7 +26,10 @@ const CheckoutForm = ({ item }) => {
     instructor_email,
     price,
     _id,
+    enrolled_student,
+    classId
   } = item;
+  console.log(item);
 
   useEffect(() => {
     if (item.price > 0) {
@@ -98,18 +101,20 @@ const CheckoutForm = ({ item }) => {
         available_seats,
         instructor_name,
         instructor_email,
-        _id
+        enrolled_student,
+        _id,
+        classId
       };
       axios.post("http://localhost:5000/payments", payment).then((res) => {
         console.log(res.data);
         if (res.data.insertResult.insertedId) {
-            Swal.fire({
-                position: "top-end",
-                icon: "Payment successful",
-                title: "Class Denied",
-                showConfirmButton: false,
-                timer: 1500,
-              });
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Payment successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
       });
     }
@@ -143,7 +148,11 @@ const CheckoutForm = ({ item }) => {
         </button>
       </form>
       {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-      {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
+      {transactionId && (
+        <p className="text-green-500">
+          Transaction complete with transactionId: {transactionId}
+        </p>
+      )}
     </>
   );
 };

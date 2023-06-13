@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Card = ({ cls }) => {
-  const { class_image, price, class_name, instructor_name,instructor_email, available_seats } = cls;
+  const { class_image, price, class_name, instructor_name,instructor_email, available_seats , enrolled_student, _id} = cls;
   console.log(cls);
   const { user } = useContext(AuthContext);
   const Navigate = useNavigate();
@@ -20,6 +20,8 @@ const Card = ({ cls }) => {
         instructor_name,
         available_seats,
         email: user.email,
+        enrolled_student,
+        classId:_id
       };
 
       fetch("http://localhost:5000/carts", {

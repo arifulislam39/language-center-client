@@ -4,7 +4,7 @@ import useClass from "../../Hooks/useClass";
 const ClassCard = () => {
   const [classes] = useClass();
 
-  console.log(classes);
+  //console.log(classes);
 
   return (
     <div>
@@ -13,6 +13,7 @@ const ClassCard = () => {
           {classes.map((cls) => (
             <Card key={cls._id} cls={cls}></Card>
           ))}
+          
         </div>
       </div>
     </div>
