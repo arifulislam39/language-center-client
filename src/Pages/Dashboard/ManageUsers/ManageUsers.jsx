@@ -68,11 +68,11 @@ const ManageUsers = () => {
 
     return (
         <div>
-            <h3>manage users {users.length}</h3>
+           <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">manage users</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     {/* head */}
-                    <thead>
+                    <thead className="text-xl">
                         <tr>
                             <th>#</th>
                             <th>Name</th>
@@ -82,6 +82,7 @@ const ManageUsers = () => {
                             <th>Make Admin</th>
                         </tr>
                     </thead>
+                   
                     <tbody>
                         {
                             users.map((user, index) => <tr key={user._id}>
@@ -93,7 +94,7 @@ const ManageUsers = () => {
                                     <button onClick={() => handleMakeAdmin(user)} className="btn ">Make Admin</button> 
                                     }</td>
                                <td>{ user.role === 'admin' ? 'admin' :
-                                    <button onClick={() => handleMakeInstructor(user)} className="btn">Make Instructor</button> 
+                                    <button onClick={() => handleMakeInstructor(user)} className="btn ">Make Instructor</button> 
                                     }</td>
                             </tr>)
                         }

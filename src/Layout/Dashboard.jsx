@@ -13,18 +13,18 @@ const Dashboard = () => {
 
           <label
             htmlFor="my-drawer-2"
-            className="btn bg-[#123821] text-white drawer-button lg:hidden"
+            className="btn bg-[#123821] hover:bg-[#dabd3a] mt-10 text-white drawer-button lg:hidden"
           >
-            Open drawer
+            Menu
           </label>
         </div>
-        <div className="drawer-side ">
+        <div className="drawer-side bg-[#123821] text-white">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full bg-[#A79132] text-base-content">
+          <ul className="menu p-4 w-60 h-full mt-5 font-bold ">
             {/* Sidebar content here */}
 
             {/* student home  */}
-           <li><NavLink to="/dashboard/mySelectedClasses">My Selected Classes</NavLink></li>
+           <li ><NavLink to="/dashboard/mySelectedClasses">My Selected Classes</NavLink></li>
 
            <li><NavLink to="/dashboard/myEnrolledClasses">My Enrolled Classes</NavLink></li>
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
 
            <div className="divider"></div>
-           <li><NavLink to="/">Home</NavLink> </li>
+           <li><NavLink className="bg-red" to="/">Home</NavLink> </li>
           </ul>
         </div>
       </div>

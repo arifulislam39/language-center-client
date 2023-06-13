@@ -1,14 +1,14 @@
 /* These styles are used if a demo specific stylesheet is not present */
 
-*,
-*:before,
-*:after {
+
+:before,
+:after {
   box-sizing: border-box;
 }
 
 body,
 html {
-  background-color: #f6f9fc;
+  background-color: #e9f1e3e4;
   font-size: 18px;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -19,34 +19,14 @@ form {
 }
 
 label {
-  color: #6b7c93;
+  color: #4e678a;
   font-weight: 300;
   letter-spacing: 0.025em;
-  margin-top: 16px;
+  
   display: block;
 }
 
-button {
-  white-space: nowrap;
-  border: 0;
-  outline: 0;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 14px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-  color: #fff;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  background-color: #6772e5;
-  text-decoration: none;
-  -webkit-transition: all 150ms ease;
-  transition: all 150ms ease;
-  margin-top: 10px;
-}
+
 
 button:hover {
   color: #fff;
@@ -64,7 +44,7 @@ input,
 select {
   display: block;
   border: none;
-  font-size: 18px;
+  
   margin: 10px 0 20px 0;
   max-width: 100%;
   padding: 10px 14px;

@@ -44,8 +44,8 @@ const AddClass = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="text-center text-4xl">Add A Class</div>
+    <div className="max-w-7xl mx-auto mt-10">
+      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">add a class</h2>
       {/* <ToastContainer className="lg:text-3xl" />
         <Head title="ADD TOYS"></Head> */}
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -124,7 +124,7 @@ const AddClass = () => {
             </div>
           </div>
 
-          <div className="form-control mt-6">
+          <div className="form-control mt-6 ml-20">
             <input
               // onClick={notify}
               className="btn bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"

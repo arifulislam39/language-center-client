@@ -20,10 +20,8 @@ const PaymentHistory = () => {
 
   return (
     <>
-      <div>
-        <h2 className="text-center text-4xl">
-          my selected classes {history.length}
-        </h2>
+      <div className="mt-10">
+      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">payment history</h2>
         <div className="overflow-x-auto w-full">
           <table className="table table-zebra w-full">
             {/* head */}

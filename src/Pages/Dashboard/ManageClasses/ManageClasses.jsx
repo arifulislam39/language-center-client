@@ -111,7 +111,7 @@ const ManageClasses = () => {
 
   return (
     <div>
-      <h2>Manage classes : {classes.length}</h2>
+     <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">manage classes</h2>
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
           {/* head */}

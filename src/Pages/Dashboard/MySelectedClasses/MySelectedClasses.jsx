@@ -41,7 +41,7 @@ const MySelectedClasses = () => {
 
     return (
         <div>
-            <h2 className="text-center text-4xl">my selected classes {cart.length}</h2>
+           <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">My selected classes</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table table-zebra w-full">
                     {/* head */}

@@ -3,8 +3,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-//import Swal from "sweetalert2";
-// import './CheckoutForm.css'
+ import './CheckoutForm.css'
 
 const CheckoutForm = ({ item }) => {
   console.log(item);
@@ -122,7 +121,7 @@ const CheckoutForm = ({ item }) => {
 
   return (
     <>
-      <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+      <form className=" mt-10 w-full" onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
@@ -140,7 +139,7 @@ const CheckoutForm = ({ item }) => {
           }}
         />
         <button
-          className="btn btn-primary"
+          className="btn bg-[#123821] hover:bg-[#dabd3a] ml-44 text-white"
           type="submit"
           disabled={!stripe || !clientSecret || processing}
         >

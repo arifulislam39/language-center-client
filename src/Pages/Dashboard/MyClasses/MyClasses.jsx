@@ -88,7 +88,7 @@ const MyClasses = () => {
 
   return (
     <div>
-      <h2>my classes : {classInfo.length}</h2>
+     <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">my classes</h2>
 
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
@@ -168,9 +168,7 @@ const MyClasses = () => {
                 ✕
               </button>
               <h3 className="font-bold text-lg">{selectedItem.status}</h3>
-              <p className="py-4">
-                Press ESC key or click on ✕ button to close
-              </p>
+             
               <p>{selectedItem.feedback}</p>{" "}
               {/* Display the selected item's feedback */}
             </form>

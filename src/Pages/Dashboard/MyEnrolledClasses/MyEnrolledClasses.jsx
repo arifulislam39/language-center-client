@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 const MyEnrolledClasses = () => {
     const [enrolled, setEnrolled]=useState([]);
     console.log(enrolled);
@@ -23,8 +22,9 @@ const MyEnrolledClasses = () => {
 
     return (
         <>
-          <div>
-            <h2 className="text-center text-4xl">my selected classes {enrolled.length}</h2>
+          <div className="mt-10">
+           
+            <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">My Enrolled classes</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table table-zebra w-full">
                     {/* head */}
