@@ -19,11 +19,13 @@ import MyClasses from "../Pages/Dashboard/MyClasses/MyClasses";
 import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import Error from "../Pages/Error/Error";
 
  export const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement:<Error></Error>,
       children:[
         {
             path: "/",
@@ -51,6 +53,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
     {
       path:"dashboard",
       element:<Dashboard></Dashboard>,
+      errorElement:<Error></Error>,
       children:[
        {
         path:"adminHome",
