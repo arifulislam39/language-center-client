@@ -48,14 +48,14 @@ const Login = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-[#C1DCDC]">
+    <div className="hero min-h-screen bg-[#C1DCDC] rounded-xl">
       <div className="hero-content flex-col lg:flex-row">
         <div className="mr-12 w-1/2">
           <img src="" alt="" />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-center">Login </h1>
+            <h1 className="text-3xl -mb-10 font-bold text-center">Login </h1>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-control">
@@ -99,7 +99,7 @@ const Login = () => {
                 />
               </div>
             </form>
-            <p className="text-center">
+            <p className="text-center -mt-10">
               New to Here?
               <Link className="text-blue-900 font-bold" to="/registration">
                 Registration

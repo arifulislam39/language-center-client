@@ -3,22 +3,16 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { useForm } from "react-hook-form";
-import Swal from 'sweetalert2'
-import { AiFillEye , AiFillEyeInvisible} from 'react-icons/ai';
-
+import Swal from "sweetalert2";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useEffect } from "react";
 
 const Registration = () => {
-  const [showPass, setShowPass]=useState(false);
-
+  const [showPass, setShowPass] = useState(false);
+  const [showConPass, setShowConPass] = useState(false);
   const { createUser, userProfile, userProfileUpdate } =
     useContext(AuthContext);
   const Navigate = useNavigate();
-  //const [error, setError] = useState("");
-
-  // handle password
-  const toggle =()=>{
-    setShowPass(!showPass)
-  }
 
   const {
     register,
@@ -28,6 +22,15 @@ const Registration = () => {
     formState: { errors },
   } = useForm();
 
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const toggle = () => {
+    setShowPass(!showPass);
+  };
+  const toggleCon = () => {
+    setShowConPass(!showConPass);
+  };
+
   const onSubmit = (data) => {
     console.log(data);
 
@@ -35,42 +38,42 @@ const Registration = () => {
       .then((result) => {
         const createdUser = result.user;
 
-       
-
-        userProfile(data.name, data.photo)
-        .then(() => {
+        userProfile(data.name, data.photo).then(() => {
           userProfileUpdate(data.name, data.photo);
 
-          // user data save on the database
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            photo: data.photo,
+            role: "student",
+          };
 
-          const saveUser = { name: data.name, email: data.email, photo:data.photo,role:"student" }
           fetch("https://language-center-server-nu.vercel.app/users", {
-            method: 'POST',
-            headers:{
-              'content-type': 'application/json'
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
             },
-            body: JSON.stringify(saveUser)
+            body: JSON.stringify(saveUser),
           })
-          .then(res => res.json())
-          .then(data =>{
-            if (data.insertedId){
-              reset();
-             // alert msg
-              Swal.fire({
-               
-                title: 'User created successfully.',
-                showClass: {
-                  popup: 'animate__animated animate__fadeInDown'
-                },
-                hideClass: {
-                  popup: 'animate__animated animate__fadeOutUp'
-                }
-              })
-            }
-          })
-        });
-        console.log(createdUser);
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
 
+                Swal.fire({
+                  title: "User created successfully.",
+                  showClass: {
+                    popup: "animate__animated animate__fadeInDown",
+                  },
+                  hideClass: {
+                    popup: "animate__animated animate__fadeOutUp",
+                  },
+                });
+              }
+            });
+        });
+
+        console.log(createdUser);
         Navigate("/");
       })
       .catch((error) => {
@@ -78,38 +81,28 @@ const Registration = () => {
       });
   };
 
+  const passwordValue = watch("password");
+  const confirmPasswordValue = watch("confirmPassword");
 
-  console.log(watch("example")); // watch input value by passing the name of it
-
+  useEffect(() => {
+    if (passwordValue !== confirmPasswordValue) {
+      setConfirmPasswordError("Passwords do not match");
+    } else {
+      setConfirmPasswordError("");
+    }
+  }, [passwordValue, confirmPasswordValue]);
 
   return (
-    <div className="hero min-h-screen bg-[#C1DCDC]">
+    
+    <div className="hero min-h-screen bg-[#C1DCDC] rounded-xl">
       <div className="hero-content flex-col lg:flex-row">
         <div className="mr-12 w-1/2">
           <img src="" alt="" />
         </div>
         <div className="card mt-28 mb-24 flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
-            <h1 className="text-3xl font-bold text-center">Registration </h1>
+            <h1 className="text-3xl -mb-10 font-bold text-center">Registration </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              {/* error message */}
-              {/* <div className="alert alert-error shadow-lg">
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="stroke-current flex-shrink-0 h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              </div> */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -141,25 +134,26 @@ const Registration = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <div className="relative"><input
-                 type={(showPass===false)?"password":"text"}
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/,
-                  })}
-                  placeholder="password"
-                  className="input input-bordered border-[#123821] border-2"
-                  name="password"
-                />
-                 <div className="absolute top-7 right-5 ">
-                 {
-                  (showPass===false)?<AiFillEye onClick={toggle}/>: <AiFillEyeInvisible onClick={toggle}/>
-                 }
-                 
-                
-                </div>
+                <div className="relative">
+                  <input
+                    type={showPass === false ? "password" : "text"}
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                      pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/,
+                    })}
+                    placeholder="password"
+                    className="input input-bordered border-[#123821] border-2"
+                    name="password"
+                  />
+                  <div className="absolute top-7 right-5 ">
+                    {showPass === false ? (
+                      <AiFillEye onClick={toggle} />
+                    ) : (
+                      <AiFillEyeInvisible onClick={toggle} />
+                    )}
+                  </div>
                 </div>
                 {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
@@ -175,23 +169,40 @@ const Registration = () => {
                   </p>
                 )}
               </div>
-              {/* <div className="form-control">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Confirm Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
+               <div className="relative">
+               <input
+                  type={showConPass === false ? "password" : "text"}
+                  placeholder="Confirm password"
                   className="input input-bordered border-[#123821] border-2"
-                  name="password"
+                  name="confirmPassword"
+                  {...register("confirmPassword")}
                 />
-              </div> */}
+                <div className="absolute top-7 right-5 ">
+                    {showConPass === false ? (
+                        <AiFillEye onClick={toggleCon} />
+                     
+                    
+                    ) : (
+                      <AiFillEyeInvisible onClick={toggleCon} />
+                    )}
+                  </div>
+               </div>
+                {confirmPasswordError && (
+                  <p className="text-red-600">{confirmPasswordError}</p>
+                )}
+              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo URL</span>
                 </label>
                 <input
-                  type="photo" {...register("photo")}
+                  type="photo"
+                  {...register("photo")}
                   placeholder="photo URL"
                   className="input input-bordered border-[#123821] border-2"
                   name="photo"
@@ -205,7 +216,7 @@ const Registration = () => {
                 />
               </div>
             </form>
-            <p className="text-center">
+            <p className="text-center -mt-10">
               Already Have an Account?
               <Link className="text-blue-900 font-bold" to="/login">
                 Login

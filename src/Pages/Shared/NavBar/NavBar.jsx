@@ -45,7 +45,7 @@ const NavBar = () => {
   );
 
   return (
-   <div className={colorChange ? "bg-[#123821] sticky top-0 z-10": "bg-opacity-10 bg-black z-10 navbar fixed max-w-screen-xl"}>
+   <div className={colorChange ? "bg-[#123821] sticky rounded-xl top-0 z-10": "bg-opacity-10 bg-black z-10 navbar rounded-xl fixed max-w-screen-xl"}>
      <div className="navbar rounded-2xl text-white">
       <div className="navbar-start">
         <div className="dropdown">
