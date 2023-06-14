@@ -81,7 +81,7 @@ const ShowCart = ({cls}) => {
     return (
         <div  className={cardClassName}>
    
-      <div className="card w-full h-[500px]  shadow-2xl" key={cls._id}>
+      <div className="card w-full h-[500px]  shadow-2xl" key={cls._id} data-aos="flip-left"  data-aos-duration="3000">
         <figure >
           <img src={class_image} alt="Shoes" />
         </figure>

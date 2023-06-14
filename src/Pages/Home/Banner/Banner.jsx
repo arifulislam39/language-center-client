@@ -10,7 +10,7 @@ const Banner = () => {
   return (
     <div className="carousel w-full h-[700px]">
 <div id="slide1" className="carousel-item relative w-full ">
-  <img src={banner4} className="w-full rounded-xl" />
+  <img src={banner4} className="w-full rounded-xl " />
 
   <div className="absolute rounded-xl flex items-center pl-16 h-full top-0 left-0 right-5 bottom-5 hero-overlay bg-opacity-30 bg-gradient-to-r from-[#7c8665] to-[rgba(21, 21, 21, 0) 100%)]">
     <div className="text-white space-y-7 w-1/2">
@@ -19,7 +19,8 @@ const Banner = () => {
         A <span className="text-blue-700">unique</span> approach to learning foreign languages online
       </h3>
       <div>
-        <button className="btn text-white hover:bg-[#dabd3a] mt-10 bg-[#123821]">
+        <button data-aos="fade-up"
+     data-aos-duration="3000" className="btn text-white hover:bg-[#dabd3a] mt-10 bg-[#123821]">
           Explore More
         </button>
       </div>

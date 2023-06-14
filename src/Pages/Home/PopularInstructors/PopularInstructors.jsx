@@ -1,5 +1,9 @@
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useEffect, useState } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 
 
 
@@ -24,7 +28,7 @@ const PopularInstructors = () => {
 
         {
             instructors.map((instructor)=>(
-                <div key={instructor._id}><div className="bg-lime-200 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" >
+                <div key={instructor._id}><div className="bg-lime-200 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" data-aos="zoom-in" data-aos-duration="1500">
                 <div className="aspect-square w-full -m-24 bg-center rounded-lg bg-cover shadow-sm translate-all duration-500 z-50" >
                   <img className="rounded-lg" src={instructor.photo} alt="" />
                 </div>
