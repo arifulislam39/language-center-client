@@ -1,31 +1,26 @@
-import { useContext} from "react";
-import { AuthContext } from "../../Pages/Providers/AuthProvider";
-import Swal from "sweetalert2";
+import { useContext } from "react";
+import useAdmin from "../../../Hooks/useAdmin";
+import useInstructor from "../../../Hooks/useInstructor";
+import { AuthContext } from "../../Providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAdmin from "../../Hooks/useAdmin";
-import useInstructor from "../../Hooks/useInstructor";
+import Swal from "sweetalert2";
+
+const ShowCart = ({cls}) => {
+    const [isAdmin]=useAdmin();
+    const [isInstructor]=useInstructor();
+    //const {role}=users;
+    const { class_image, price, class_name, instructor_name,instructor_email, available_seats , enrolled_student, _id} = cls;
+    console.log(cls);
 
 
-const Card = ({ cls }) => {
-  const [isAdmin]=useAdmin();
-  const [isInstructor]=useInstructor();
-  //const {role}=users;
-  const { class_image, price, class_name, instructor_name,instructor_email, available_seats , enrolled_student, _id} = cls;
-  console.log(cls);
-
-  
-
-
-  //available seats ===0 to card red
-  const cardClassName = available_seats === 0 ? 'bg-red-700' : 'bg-base-100';
+    const cardClassName = available_seats === 0 ? 'bg-red-700' : 'bg-base-100';
 
   const { user } = useContext(AuthContext);
   const Navigate = useNavigate();
   const location = useLocation();
 
 
-
-//check logged in user
+  //check logged in user
   const handleUserCheck =()=>{
     if(!user){
       confirm('You have to log in first to Enroll Class')
@@ -83,8 +78,8 @@ const Card = ({ cls }) => {
     }
   };
 
-  return (
-    <div  className={cardClassName}>
+    return (
+        <div  className={cardClassName}>
    
       <div className="card w-full h-[500px]  shadow-2xl" key={cls._id}>
         <figure >
@@ -116,7 +111,7 @@ const Card = ({ cls }) => {
          </div>
         </div>
     </div>
-  );
+    );
 };
 
-export default Card;
+export default ShowCart;

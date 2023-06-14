@@ -6,10 +6,19 @@ import {RiFileSettingsLine} from "react-icons/ri"
 import { useContext } from "react";
 import { AuthContext } from "../Pages/Providers/AuthProvider";
 import {BiLogOut} from "react-icons/bi"
+import useAdmin from "../Hooks/useAdmin";
+import useInstructor from "../Hooks/useInstructor";
 
 
 const Dashboard = () => {
   const { logOut } = useContext(AuthContext);
+
+
+  //
+  const [isAdmin]=useAdmin();
+  const [isInstructor]=useInstructor();
+
+  
   const handleLogout = () => {
     logOut()
       .then()
@@ -40,25 +49,40 @@ const Dashboard = () => {
             {/* Sidebar content here */}
             <li><NavLink className="bg-red" to="/"><AiFillHome /> Home</NavLink> </li>
 
-            {/* student home  */}
+{
+  isAdmin?(
+    <> <li><NavLink to="/dashboard/manageClasses"><RiFileSettingsLine /> Manage Classes</NavLink></li>
+    <li><NavLink to="/dashboard/manageUsers"><FaUsersCog /> Manage Users</NavLink></li>
+    <li className="mt-60"><button onClick={handleLogout}><BiLogOut /> LogOut</button></li>
+    </>
+   
+  ):(
+    isInstructor?(
+      <><li><NavLink to="/dashboard/addClass"><MdLibraryAdd /> Add Class</NavLink></li>
+      <li><NavLink to="/dashboard/myClasses"><FaFileAlt /> My Classes</NavLink></li></>
+      
 
-           <li ><NavLink to="/dashboard/mySelectedClasses"><FaShoppingCart /> My Selected Classes</NavLink></li>
+    ):(
+      <><li ><NavLink to="/dashboard/mySelectedClasses"><FaShoppingCart /> My Selected Classes</NavLink></li>
 
-           <li><NavLink to="/dashboard/myEnrolledClasses"><AiOutlineFileDone /> My Enrolled Classes</NavLink></li>
+      <li><NavLink to="/dashboard/myEnrolledClasses"><AiOutlineFileDone /> My Enrolled Classes</NavLink></li>
+      
+      <li><NavLink to="/dashboard/paymentHistory"><MdPayment /> Payment History</NavLink></li>
+      </>
 
-           <li><NavLink to="/dashboard/paymentHistory"><MdPayment /> Payment History</NavLink></li>
+    )
+  )
+}
+            {/* Admin home  */}
+           
 
            {/* instructor home  */}
-           <li><NavLink to="/dashboard/addClass"><MdLibraryAdd /> Add Class</NavLink></li>
-           <li><NavLink to="/dashboard/myClasses"><FaFileAlt /> My Classes</NavLink></li>
-
-           {/* Admin home  */}
-           <li><NavLink to="/dashboard/manageClasses"><RiFileSettingsLine /> Manage Classes</NavLink></li>
-           <li><NavLink to="/dashboard/manageUsers"><FaUsersCog /> Manage Users</NavLink></li>
-           <li className="mt-60"><button onClick={handleLogout}><BiLogOut /> LogOut</button></li>
-
-           <div className="divider"></div>
           
+          
+
+           {/* student home  */}
+
+           
           </ul>
         </div>
       </div>
