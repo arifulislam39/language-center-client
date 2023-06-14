@@ -11,7 +11,7 @@ const MyClasses = () => {
     queryKey: ["classes", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/classes/${user?.email}`
+        `https://language-center-server-nu.vercel.app/classes/${user?.email}`
       );
       return res.data;
     },
@@ -60,7 +60,7 @@ const MyClasses = () => {
 
     console.log(update);
 
-    fetch(`http://localhost:5000/updateClass/${item._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/updateClass/${item._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

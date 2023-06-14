@@ -44,7 +44,7 @@ const Registration = () => {
           // user data save on the database
 
           const saveUser = { name: data.name, email: data.email, photo:data.photo,role:"student" }
-          fetch("http://localhost:5000/users", {
+          fetch("https://language-center-server-nu.vercel.app/users", {
             method: 'POST',
             headers:{
               'content-type': 'application/json'

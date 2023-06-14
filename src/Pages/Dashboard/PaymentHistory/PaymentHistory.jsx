@@ -6,7 +6,7 @@ const PaymentHistory = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/paymentHistory")
+      .get("https://language-center-server-nu.vercel.app/paymentHistory")
       .then((response) => {
         // Handle the response data
         console.log(response.data);

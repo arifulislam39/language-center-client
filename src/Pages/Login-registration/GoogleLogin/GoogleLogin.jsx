@@ -17,7 +17,7 @@ const GoogleLogin = () => {
         const loggedInUser = result.user;
 
         const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photo:loggedInUser.photoURL,role:"student"}
-        fetch('http://localhost:5000/users', {
+        fetch('https://language-center-server-nu.vercel.app/users', {
           method: 'POST',
           headers: {
               'content-type': 'application/json'

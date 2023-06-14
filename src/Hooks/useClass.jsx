@@ -7,7 +7,7 @@ const useClass = () => {
     const {data: classes = [], refetch} = useQuery({
         queryKey: ['classes'],
         queryFn: async() => {
-            const res = await axios.get('http://localhost:5000/classes');
+            const res = await axios.get('https://language-center-server-nu.vercel.app/classes');
             return res.data;
         }
     })

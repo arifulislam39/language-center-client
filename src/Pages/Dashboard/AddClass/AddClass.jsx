@@ -18,7 +18,7 @@ const AddClass = () => {
       instructor_name: data.instructor_name,
       instructor_email: data.instructor_email,status:"pending",enrolled_student:parseInt(0)
     };
-    fetch("http://localhost:5000/classes", {
+    fetch("https://language-center-server-nu.vercel.app/classes", {
       method: "POST",
       headers: {
         "content-type": "application/json",

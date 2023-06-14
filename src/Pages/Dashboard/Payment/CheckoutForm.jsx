@@ -33,7 +33,7 @@ const CheckoutForm = ({ item }) => {
   useEffect(() => {
     if (item.price > 0) {
       axios
-        .post("http://localhost:5000/create-payment-intent", {
+        .post("https://language-center-server-nu.vercel.app/create-payment-intent", {
           price: item.price,
         })
         .then((res) => {
@@ -104,7 +104,7 @@ const CheckoutForm = ({ item }) => {
         _id,
         classId
       };
-      axios.post("http://localhost:5000/payments", payment).then((res) => {
+      axios.post("https://language-center-server-nu.vercel.app/payments", payment).then((res) => {
         console.log(res.data);
         if (res.data.insertResult.insertedId) {
           Swal.fire({

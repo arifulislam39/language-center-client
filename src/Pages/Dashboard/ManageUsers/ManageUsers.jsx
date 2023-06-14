@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users");
+      const res = await axios.get("https://language-center-server-nu.vercel.app/users");
       return res.data;
     },
   });
@@ -15,7 +15,7 @@ const ManageUsers = () => {
   
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/${user._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/users/${user._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const ManageUsers = () => {
   };
 
   const handleMakeInstructor = (user) => {
-    fetch(`http://localhost:5000/users/${user._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/users/${user._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

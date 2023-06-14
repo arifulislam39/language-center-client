@@ -6,7 +6,7 @@ const Blog = () => {
     console.log(blogs);
 
     useEffect(() => {
-        fetch("http://localhost:5000/blogs")
+        fetch("https://language-center-server-nu.vercel.app/blogs")
           .then((res) => res.json())
           .then((data) => setBlogs(data));
       }, []);
@@ -16,7 +16,7 @@ const Blog = () => {
    
       <>
       <SectionTitle heading={"Blog"}
-            subHeading={"Let's See our latest Blogs"}></SectionTitle>
+            subHeading={"Let's See our latest Blog"}></SectionTitle>
       <div className="grid gap-14 lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 mt-20 mb-20">
       {
         blogs.map(blog=><div className="card card-side bg-[#DEE1E6] shadow-xl" key={blog.id}>

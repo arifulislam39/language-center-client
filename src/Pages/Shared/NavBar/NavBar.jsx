@@ -72,7 +72,7 @@ const NavBar = () => {
             {navItems}
           </ul>
         </div>
-        <a className="btn btn-ghost font-bold text-2xl">LANGUAGE CENTER</a>
+        <a className="btn btn-ghost font-bold text-2xl"><span className="text-6xl text-[rgb(171,141,3)] font-bold">L</span> ANGUAGE CENTER</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navItems}</ul>

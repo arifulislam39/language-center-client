@@ -74,7 +74,7 @@ import Error from "../Pages/Error/Error";
        {
         path:"payment/:id",
         element:<Payment></Payment>,
-        loader:({params})=>fetch(`http://localhost:5000/cart/${params.id}`),
+        loader:({params})=>fetch(`https://language-center-server-nu.vercel.app/cart/${params.id}`),
        },
        {
         path:"myEnrolledClasses",

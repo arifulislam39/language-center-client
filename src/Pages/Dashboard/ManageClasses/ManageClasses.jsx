@@ -8,7 +8,7 @@ const ManageClasses = () => {
 
   //handle approve
   const handleApprove = (item) => {
-    fetch(`http://localhost:5000/classes/${item._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const ManageClasses = () => {
 
   //handle deny
   const handleDeny = (item) => {
-    fetch(`http://localhost:5000/classes/${item._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const ManageClasses = () => {
   
     console.log(update);
   
-    fetch(`http://localhost:5000/classes/${item._id}`, {
+    fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

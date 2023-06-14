@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {AiFillHome, AiOutlineFileDone} from "react-icons/ai"
 import {FaUsersCog, FaShoppingCart, FaFileAlt} from "react-icons/fa"
 import {MdPayment,MdLibraryAdd} from "react-icons/md"
@@ -12,7 +12,9 @@ import useInstructor from "../Hooks/useInstructor";
 
 const Dashboard = () => {
   const { logOut } = useContext(AuthContext);
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   //
   const [isAdmin]=useAdmin();
@@ -21,6 +23,7 @@ const Dashboard = () => {
   
   const handleLogout = () => {
     logOut()
+    navigate(from, { replace: true })
       .then()
       .catch((error) => {
         console.log(error);

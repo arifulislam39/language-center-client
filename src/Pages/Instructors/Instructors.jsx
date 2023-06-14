@@ -6,7 +6,7 @@ const Instructors = () => {
   console.log(instructors);
 
   useEffect(() => {
-    fetch("http://localhost:5000/instructors")
+    fetch("https://language-center-server-nu.vercel.app/instructors")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);

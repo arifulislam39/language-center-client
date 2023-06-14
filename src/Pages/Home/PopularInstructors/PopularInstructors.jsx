@@ -8,13 +8,14 @@ const PopularInstructors = () => {
     console.log(instructors);
   
     useEffect(() => {
-      fetch("http://localhost:5000/instructor")
+      fetch("https://language-center-server-nu.vercel.app/instructor")
         .then((res) => res.json())
         .then((data) => setInstructors(data));
     }, []);
     return (
         <div>
-            <SectionTitle heading={"Popular Instructors"}></SectionTitle>
+            <SectionTitle heading={"Popular Instructors"}
+            subHeading={"Meet The Our Best Team"}></SectionTitle>
             <div>
       <div>
 

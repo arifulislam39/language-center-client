@@ -9,7 +9,7 @@ const useCart = () => {
     const { refetch, data: cart = []} = useQuery({
       queryKey: ['carts', user?.email],
       queryFn: async() => {
-          const res = await axios.get(`http://localhost:5000/carts/${user?.email}`);
+          const res = await axios.get(`https://language-center-server-nu.vercel.app/carts/${user?.email}`);
           return res.data;
       }
   })
@@ -24,7 +24,7 @@ const useCart = () => {
     // console.log(carts);
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/carts/${user?.email}`)
+    //     fetch(`https://language-center-server-nu.vercel.app/carts/${user?.email}`)
     //       .then((res) => res.json())
     //       .then((result) => {
     //         setCarts(result);
