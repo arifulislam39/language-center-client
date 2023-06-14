@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 
 const ManageClasses = () => {
   const [classes, refetch] = useClass();
+  
 
   //handle approve
   const handleApprove = (item) => {
@@ -124,6 +125,7 @@ const ManageClasses = () => {
               <th>Instructor Email</th>
               <th>Available Seats</th>
               <th>Price</th>
+              <th>Status</th>
               <th>Approve</th>
               <th>Deny</th>
               <th>Feedback</th>
@@ -148,13 +150,14 @@ const ManageClasses = () => {
                 <td>{item.instructor_email}</td>
                 <td>{item.available_seats}</td>
                 <td className="text-end">${item.price}</td>
+                <td>{item.status}</td>
                 <td>
-                  <button onClick={() => handleApprove(item)} className="btn">
+                  <button onClick={() => handleApprove(item)} className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]" disabled={item?.status ==="approved" || item?.status ==="denied"}>
                     Approve
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handleDeny(item)} className="btn">
+                  <button onClick={() => handleDeny(item)} className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]" disabled={item?.status ==="approved" || item?.status ==="denied"}>
                     Deny
                   </button>
                 </td>
@@ -162,7 +165,7 @@ const ManageClasses = () => {
                   {" "}
                   <div>
                     <button
-                      className="btn"
+                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
                       onClick={() => FeedbackOpenModal(item)}
                     >
                       Feedback

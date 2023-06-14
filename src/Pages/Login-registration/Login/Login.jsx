@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AiFillEye , AiFillEyeInvisible} from 'react-icons/ai';
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { useForm } from "react-hook-form";
@@ -8,9 +9,15 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
+  const [showPass, setShowPass]=useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  // handle password
+  const toggle =()=>{
+    setShowPass(!showPass)
+  }
 
   const { register, handleSubmit,reset } = useForm();
 
@@ -67,13 +74,22 @@ const Login = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
+                <div className="relative">
                 <input
-                  type="password"
+                  type={(showPass===false)?"password":"text"}
                   {...register("password")}
                   placeholder="password"
                   className="input input-bordered border-[#123821] border-2"
                   name="password"
                 />
+                <div className="absolute top-7 right-5 ">
+                 {
+                  (showPass===false)?<AiFillEye onClick={toggle}/>: <AiFillEyeInvisible onClick={toggle}/>
+                 }
+                 
+                
+                </div>
+                </div>
               </div>
               <div className="form-control mt-6">
                 <input

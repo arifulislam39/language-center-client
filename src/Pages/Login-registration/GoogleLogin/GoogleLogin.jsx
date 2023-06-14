@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from 'sweetalert2'
-
+import {FcGoogle} from "react-icons/fc"
 import { useLocation, useNavigate } from "react-router-dom";
 
 const GoogleLogin = () => {
@@ -52,11 +52,10 @@ const GoogleLogin = () => {
   return (
     <div className="">
       <div className="divider">OR</div>
-      <div className="form-control mt-6"><button onClick={handleGoogleSignIn} className="btn bg-purple-900 btn-outline text-white">With Google</button>
-
+      <div className="form-control mt-6"><button onClick={handleGoogleSignIn} className="btn text-black hover:text-black"> <FcGoogle className="text-3xl mr-8"></FcGoogle> With Google</button>
       </div>
 
-     
+    
     </div>
   );
 };

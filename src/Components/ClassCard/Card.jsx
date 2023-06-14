@@ -1,14 +1,49 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Pages/Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const Card = ({ cls }) => {
+  const [users,setUsers]=useState([]);
+  console.log(users);
+  //const {role}=users;
+  console.log(users.role);
   const { class_image, price, class_name, instructor_name,instructor_email, available_seats , enrolled_student, _id} = cls;
   console.log(cls);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users")
+      .then((response) => {
+        // Handle the response data
+        console.log(response.data);
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error(error);
+      });
+  }, []);
+
+
+  //available seats ===0 to card red
+  const cardClassName = available_seats === 0 ? 'bg-red-700' : 'bg-base-100';
+
   const { user } = useContext(AuthContext);
   const Navigate = useNavigate();
   const location = useLocation();
+
+
+
+//check logged in user
+  const handleUserCheck =()=>{
+    if(!user){
+      confirm('You have to log in first to Enroll Class')
+    }
+  }
+//add to card
   const handleAddToCart = (item) => {
     console.log(item);
     if (user && user.email) {
@@ -38,7 +73,7 @@ const Card = ({ cls }) => {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: "Food added on the cart.",
+              title: "Class added on the cart.",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -46,7 +81,7 @@ const Card = ({ cls }) => {
         });
     } else {
       Swal.fire({
-        title: "Please login to order the food",
+        title: "Please login to Enroll the Class",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -61,26 +96,31 @@ const Card = ({ cls }) => {
   };
 
   return (
-    <div>
-      <div className="card w-full h-[500px] bg-base-100 shadow-2xl" key={cls._id}>
-        <figure>
+    <div  className={cardClassName}>
+   
+      <div className="card w-full h-[500px]  shadow-2xl" key={cls._id}>
+        <figure >
           <img src={class_image} alt="Shoes" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{class_name}</h2>
-          <h2 className="card-title">{instructor_name}</h2>
-          <p>{available_seats}</p>
-          <p>{price}</p>
+         <h2 className="card-title text-[#123821]">{class_name}</h2>
+          <h2 className="">Instructor : {instructor_name}</h2>
+          <p>Available Seats:  {available_seats}</p>
+          <p>Enrolled:  {enrolled_student}</p>
+          <p className="text-red-400"> Price : <span className="text-xl">${price}</span> </p>
           <div className="card-actions justify-center">
             <button
-              onClick={(item) => handleAddToCart(item)}
+              onClick={() => {
+                handleUserCheck();
+                handleAddToCart(cls);
+              }}
               className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
-            >
+            disabled={available_seats ===0 || users.role ==="admin" || users.role==="instructor"}>
               Enroll
             </button>
           </div>
+         </div>
         </div>
-      </div>
     </div>
   );
 };

@@ -126,12 +126,12 @@ const MyClasses = () => {
                 <td>{item.available_seats}</td>
                 <td className="text-end">${item.price}</td>
                 <td>{item.status}</td>
-                <td>Enroll</td>
+                <td>{item.enrolled_student}</td>
 
                 <td>
                   <div>
                     <button
-                      className="btn"
+                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
                       onClick={() => FeedbackOpenModal(item)}
                     >
                       Update
@@ -142,7 +142,7 @@ const MyClasses = () => {
                 <td>
                   <div>
                     <button
-                      className="btn"
+                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
                       onClick={() => ViewFeedbackOpenModal(item)}
                     >
                       View Feedback

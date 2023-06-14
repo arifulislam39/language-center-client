@@ -34,11 +34,11 @@ const PopularClasses = () => {
               <img src={cls.class_image} alt="Shoes" />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{cls.class_name}</h2>
-              <h2 className="card-title">{cls.instructor_name}</h2>
-              <p>{cls.available_seats}</p>
-              <p> students: {cls.enrolled_student}</p>
-              <p>{cls.price}</p>
+              <h2 className="card-title text-[#123821]">{cls.class_name}</h2>
+              <h2 className="">Instructor : {cls.instructor_name}</h2>
+              <p>Available Seats : {cls.available_seats}</p>
+              <p> Enrolled : {cls.enrolled_student}</p>
+              <p className="text-red-400"> Price : <span className="text-xl">${cls.price}</span> </p>
               <div className="card-actions justify-center">
                 <button
                  

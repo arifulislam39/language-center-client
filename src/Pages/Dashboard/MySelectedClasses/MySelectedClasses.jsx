@@ -79,11 +79,11 @@ const MySelectedClasses = () => {
                                 </td>
                                 <td className="text-end">${item.price}</td>
                                 <td>
-                               <Link  to={`/dashboard/payment/${item._id}`}><button className="btn">Pay</button></Link>
+                               <Link  to={`/dashboard/payment/${item._id}`}><button className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]">Pay</button></Link>
                                     
                                    
                                 </td>
-                                <td><button onClick={() => handleDelete(item)} className="btn">Delete</button></td>
+                                <td><button onClick={() => handleDelete(item)} className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]">Delete</button></td>
 
                                
                             </tr>)

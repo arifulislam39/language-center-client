@@ -124,10 +124,10 @@ const AddClass = () => {
             </div>
           </div>
 
-          <div className="form-control mt-6 ml-20">
+          <div className="form-control mt-6 ml-32">
             <input
               // onClick={notify}
-              className="btn bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
+              className="btn  bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
               type="submit"
               value="Add"
             />

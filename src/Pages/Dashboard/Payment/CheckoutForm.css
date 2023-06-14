@@ -8,7 +8,7 @@
 
 body,
 html {
-  background-color: #e9f1e3e4;
+  background-color: #fffadb;
   font-size: 18px;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -54,7 +54,7 @@ select {
   background: white;
   color: #424770;
   letter-spacing: 0.025em;
-  width: 500px;
+  width: 300px;
 }
 
 input::placeholder {

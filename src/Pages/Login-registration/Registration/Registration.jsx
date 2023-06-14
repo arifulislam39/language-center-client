@@ -1,15 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
+import { AiFillEye , AiFillEyeInvisible} from 'react-icons/ai';
+
 
 const Registration = () => {
+  const [showPass, setShowPass]=useState(false);
+
   const { createUser, userProfile, userProfileUpdate } =
     useContext(AuthContext);
   const Navigate = useNavigate();
   //const [error, setError] = useState("");
+
+  // handle password
+  const toggle =()=>{
+    setShowPass(!showPass)
+  }
 
   const {
     register,
@@ -132,8 +141,8 @@ const Registration = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  type="password"
+                <div className="relative"><input
+                 type={(showPass===false)?"password":"text"}
                   {...register("password", {
                     required: true,
                     minLength: 6,
@@ -144,6 +153,14 @@ const Registration = () => {
                   className="input input-bordered border-[#123821] border-2"
                   name="password"
                 />
+                 <div className="absolute top-7 right-5 ">
+                 {
+                  (showPass===false)?<AiFillEye onClick={toggle}/>: <AiFillEyeInvisible onClick={toggle}/>
+                 }
+                 
+                
+                </div>
+                </div>
                 {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
                 )}
