@@ -3,7 +3,7 @@ import {GrInstagram} from "react-icons/gr"
 import {AiFillTwitterSquare} from "react-icons/ai"
 const Footer = () => {
   return (
-    <footer className="bg-[#123821] rounded-2xl text-white">
+    <footer className="bg-[#123821] text-white">
       <div className="footer p-10">
         <div>
           <p className="btn btn-ghost font-bold mb-4 text-2xl">

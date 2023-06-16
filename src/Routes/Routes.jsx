@@ -20,6 +20,9 @@ import ManageClasses from "../Pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import Error from "../Pages/Error/Error";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
+import StudentRoute from "./StudentRoute";
 
  export const router = createBrowserRouter([
     {
@@ -57,48 +60,48 @@ import Error from "../Pages/Error/Error";
       children:[
        {
         path:"adminHome",
-        element:<AdminHome></AdminHome>
+        element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
        },
        {
         path:"instructorHome",
-        element:<InstructorHome></InstructorHome>
+        element:<InstructorRoute><InstructorHome></InstructorHome></InstructorRoute>
        },
        {
         path:"studentHome",
-        element:<StudentHome></StudentHome>
+        element:<StudentRoute><StudentHome></StudentHome></StudentRoute>
        },
        {
         path:"mySelectedClasses",
-        element:<MySelectedClasses></MySelectedClasses>
+        element:<StudentRoute><MySelectedClasses></MySelectedClasses></StudentRoute>
        },
        {
         path:"payment/:id",
-        element:<Payment></Payment>,
+        element:<StudentRoute><Payment></Payment></StudentRoute>,
         loader:({params})=>fetch(`https://language-center-server-nu.vercel.app/cart/${params.id}`),
        },
        {
         path:"myEnrolledClasses",
-        element:<MyEnrolledClasses></MyEnrolledClasses>
+        element:<StudentRoute><MyEnrolledClasses></MyEnrolledClasses></StudentRoute>
        },
        {
         path:"paymentHistory",
-        element:<PaymentHistory></PaymentHistory>
+        element:<StudentRoute><PaymentHistory></PaymentHistory></StudentRoute>
        },
        {
         path:"addClass",
-        element:<AddClass></AddClass>
+        element:<InstructorRoute><AddClass></AddClass></InstructorRoute>
        },
        {
         path:"myClasses",
-        element:<MyClasses></MyClasses>
+        element:<InstructorRoute><MyClasses></MyClasses></InstructorRoute>
        },
        {
         path:"manageClasses",
-        element:<ManageClasses></ManageClasses>
+        element:<AdminRoute><ManageClasses></ManageClasses></AdminRoute>
        },
        {
         path:"manageUsers",
-        element:<ManageUsers></ManageUsers>
+        element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
        }
 
       ]

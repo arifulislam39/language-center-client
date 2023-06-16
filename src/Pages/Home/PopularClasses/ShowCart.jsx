@@ -10,7 +10,7 @@ const ShowCart = ({cls}) => {
     const [isInstructor]=useInstructor();
     //const {role}=users;
     const { class_image, price, class_name, instructor_name,instructor_email, available_seats , enrolled_student, _id} = cls;
-    console.log(cls);
+    //console.log(cls);
 
 
     const cardClassName = available_seats === 0 ? 'bg-red-700' : 'bg-base-100';

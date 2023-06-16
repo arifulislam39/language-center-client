@@ -84,7 +84,7 @@ const Card = ({ cls }) => {
   };
 
   return (
-    <div  className={cardClassName}>
+    <div  className={cardClassName} data-aos="flip-left"  data-aos-duration="3000">
    
       <div className="card w-full h-[500px]  shadow-2xl" key={cls._id}>
         <figure >

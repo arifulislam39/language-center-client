@@ -10,7 +10,7 @@ const useInstructor = () => {
         enabled: !loading,
         queryFn: async () => {
             const res = await axios.get(`https://language-center-server-nu.vercel.app/users/instructor/${user?.email}`);
-            return res.data.admin;
+            return res.data.instructor;
         }
     })
     return [isInstructor, isInstructorLoading]}

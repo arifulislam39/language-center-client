@@ -1,23 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const PaymentHistory = () => {
-  const [history, setHistory] = useState([]);
+  const {user} =useContext(AuthContext)
 
-  useEffect(() => {
-    axios
-      .get("https://language-center-server-nu.vercel.app/paymentHistory")
-      .then((response) => {
-        // Handle the response data
-        console.log(response.data);
-        setHistory(response.data);
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error(error);
-      });
-  }, []);
-
+  const {data: history = []} = useQuery({
+    queryKey: ['payments', user?.email],
+    queryFn: async() => {
+        const res = await axios.get(`https://language-center-server-nu.vercel.app/paymentHistory/${user?.email}`);
+        return res.data;
+    }
+})
   return (
     <>
       <div className="mt-10">

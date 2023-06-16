@@ -1,23 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext} from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const MyEnrolledClasses = () => {
-    const [enrolled, setEnrolled]=useState([]);
-    console.log(enrolled);
+    const {user} =useContext(AuthContext)
 
-    useEffect(() => {
-        axios
-          .get("https://language-center-server-nu.vercel.app/popularClass")
-          .then((response) => {
-            // Handle the response data
-            console.log(response.data);
-            setEnrolled(response.data);
-          })
-          .catch((error) => {
-            // Handle any errors
-            console.error(error);
-          });
-      }, []);
+    
+
+    const {data: enroll = []} = useQuery({
+      queryKey: ['payments', user?.email],
+      queryFn: async() => {
+          const res = await axios.get(`https://language-center-server-nu.vercel.app/payments/${user?.email}`);
+          return res.data;
+      }
+  })
 
 
     return (
@@ -40,8 +37,8 @@ const MyEnrolledClasses = () => {
                     </thead>
                     <tbody>
                         {
-                            enrolled.map((item, index) => <tr
-                                key={item._id}
+                           enroll.map((item, index) => <tr
+                                key={item?._id}
                             >
                                 <td>
                                     {index + 1}
@@ -49,7 +46,7 @@ const MyEnrolledClasses = () => {
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={item.class_image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={item?.class_image} alt="Avatar Tailwind CSS Component" />
                                         </div>
                                     </div>
                                 </td>
@@ -57,9 +54,9 @@ const MyEnrolledClasses = () => {
                                     {item.class_name}
                                 </td>
                                 <td>
-                                    {item.instructor_name}
+                                    {item?.instructor_name}
                                 </td>
-                                <td className="text-end">${item.price}</td>
+                                <td className="text-end">${item?.price}</td>
                                
                                 
 

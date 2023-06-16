@@ -17,7 +17,7 @@ const PopularInstructors = () => {
         .then((data) => setInstructors(data));
     }, []);
     return (
-        <div>
+        <div className="px-20">
             <SectionTitle heading={"Popular Instructors"}
             subHeading={"Meet The Our Best Team"}></SectionTitle>
             <div>
@@ -28,7 +28,7 @@ const PopularInstructors = () => {
 
         {
             instructors.map((instructor)=>(
-                <div key={instructor._id}><div className="bg-lime-200 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" data-aos="zoom-in" data-aos-duration="1500">
+                <div key={instructor._id}><div className="bg-lime-100 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" data-aos="zoom-in-up" data-aos-duration="1500">
                 <div className="aspect-square w-full -m-24 bg-center rounded-lg bg-cover shadow-sm translate-all duration-500 z-50" >
                   <img className="rounded-lg" src={instructor.photo} alt="" />
                 </div>

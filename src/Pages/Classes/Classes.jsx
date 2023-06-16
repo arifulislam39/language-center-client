@@ -1,11 +1,8 @@
-import img from "../../assets/images/banner/banner6.jpg";
+import img from "../../assets/images/banner/class.jpg";
 
 import ClassCard from "../../Components/ClassCard/ClassCard";
-import useClass from "../../Hooks/useClass";
 
 const Classes = () => {
-  const [classes]=useClass();
-  console.log(classes);
   return (
     <div>
       <img src={img} alt="" className="w-full h-[300px]" />{" "}

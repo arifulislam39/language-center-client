@@ -11,15 +11,15 @@ const Instructors = () => {
       .then((data) => setInstructors(data));
   }, []);
   return (
-    <div>
+    <div >
       <div>
         <img className="w-full h-[300px]" src={img2} alt="" />
       </div>
-      <div className="grid gap-14 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-20 mb-20">
+      <div className="grid gap-14 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-20 mb-20 px-20">
 
         {
             instructors.map((instructor)=>(
-                <div key={instructor._id}><div className="bg-lime-200 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" >
+                <div key={instructor._id}><div className=" bg-purple-200 w-full h-auto flex flex-col items-center p-8 rounded-lg shadow-2xl group mt-20" data-aos="zoom-in-up" data-aos-duration="1500">
                 <div className="aspect-square w-full -m-24 bg-center rounded-lg bg-cover shadow-sm translate-all duration-500 z-50" >
                   <img className="rounded-lg" src={instructor.photo} alt="" />
                 </div>
