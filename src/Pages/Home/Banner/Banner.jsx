@@ -56,9 +56,10 @@ const Banner = () => {
 
         <div className="absolute rounded-xl flex items-center pl-16 h-full top-0 left-0 right-5 bottom-5 bg-gradient-to-r from-[#7c8665] to-[rgba(21, 21, 21, 0) 100%)]">
           <div className="text-white space-y-7 w-1/2">
-            <h2 className="text-7xl text-[#123821] font-bold uppercase">
+            <Slide> <h2 className="text-7xl text-[#123821] font-bold uppercase">
               Study language having fun!
-            </h2>
+            </h2></Slide>
+           
             <h3 className="text-3xl font-bold">
               We Have The International Reputation For High Quality Teaching and
               Success.
@@ -73,12 +74,13 @@ const Banner = () => {
         </div>
 
         <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 bottom-5">
-          <a href="#slide1" className="btn bg-[#ccb035] btn-square mr-10">
+          <Zoom> <a href="#slide1" className="btn bg-[#ccb035] btn-square mr-10">
             ❮
           </a>
           <a href="#slide3" className="btn bg-[#ccb035] btn-square ">
             ❯
-          </a>
+          </a></Zoom>
+         
         </div>
       </div>
       <div id="slide3" className="carousel-item relative w-full">
@@ -86,13 +88,15 @@ const Banner = () => {
 
         <div className="absolute rounded-xl flex items-center pl-16 h-full top-0 left-0 right-5 bottom-5 bg-gradient-to-r from-[#74ac94] to-[rgba(21, 21, 21, 0) 100%)]">
           <div className="text-white space-y-7 w-1/2">
-            <h2 className="text-7xl text-[#123821] font-bold uppercase">
+            <Slide> <h2 className="text-7xl text-[#123821] font-bold uppercase">
               classes now forming!
-            </h2>
-            <h3 className="text-3xl font-bold">
-              Our Courses Are Taught At Beginner To Advanced Leaves On A Year
-              Round Basis.
-            </h3>
+            </h2></Slide>
+           
+           <Fade className="text-3xl font-bold" delay={1e3} cascade damping={1e-1}> Our Courses Are Taught At Beginner To Advanced Leaves On A Year
+              Round Basis.</Fade>
+            
+             
+           
             <div>
               <button className="btn text-white hover:bg-[#dabd3a] mt-10 bg-[#123821]">
                 Explore More
@@ -102,12 +106,13 @@ const Banner = () => {
         </div>
 
         <div className="absolute flex justify-center transform -translate-y-1/2 left-5 right-5 bottom-5">
-          <a href="#slide2" className="btn bg-[#ccb035] btn-square mr-10">
+          <Zoom><a href="#slide2" className="btn bg-[#ccb035] btn-square mr-10">
             ❮
           </a>
           <a href="#slide1" className="btn bg-[#ccb035] btn-square">
             ❯
-          </a>
+          </a></Zoom>
+          
         </div>
       </div>
     </div>

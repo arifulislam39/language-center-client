@@ -11,6 +11,14 @@ const Blog = () => {
           .then((data) => setBlogs(data));
       }, []);
 
+
+      const sliceText = (text, maxLength) => {
+        const words = text.split(" ");
+        const slicedText = words.slice(0, maxLength).join(" ");
+        const ellipsis = words.length > maxLength ? "..." : "";
+        return slicedText + ellipsis;
+      };
+
   
   return (
    
@@ -23,7 +31,9 @@ const Blog = () => {
         <figure ><img src={blog.image} className="h-full" alt="Movie"/></figure>
         <div className="card-body">
           <h2 className="card-title">{blog.title}</h2>
-          <p className="w-56 h-32 overflow-hidden">{blog.details}</p>
+          <p className="w-56 h-32 overflow-hidden">
+                {sliceText(blog.details, 18)}
+              </p>
           <div className="card-actions justify-end">
           <button
                  
