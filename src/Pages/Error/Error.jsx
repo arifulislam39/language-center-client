@@ -16,7 +16,7 @@ const Error = () => {
               to="/"
               className="px-8 py-3  font-semibold rounded text-white hover:bg-[#dabd3a]  bg-[#123821]"
             >
-              Back to home page
+              Back to home page.
             </Link>
           </div>
         </div>
