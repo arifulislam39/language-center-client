@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import logo1 from "../../../assets/images/banner/logo.png"
 
 const NavBar = () => {
   const { logOut, user } = useContext(AuthContext);
@@ -138,10 +139,10 @@ const NavBar = () => {
               </div>
             </ul>
           </div>
-          <h2 className="font-bold text-2xl">
-            <span className="text-6xl text-[rgb(171,141,3)] font-bold">L</span>{" "}
-            ANGUAGE CENTER
-          </h2>
+         
+          <div className="-my-14">
+            <img src={logo1} alt="" />
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>

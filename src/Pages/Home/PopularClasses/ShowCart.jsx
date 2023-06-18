@@ -88,8 +88,8 @@ const ShowCart = ({cls}) => {
         <div className="card-body">
          <h2 className="card-title text-[#123821]">{class_name}</h2>
           <h2 className="">Instructor : {instructor_name}</h2>
-          <p>Available Seats:  {available_seats}</p>
-          <p>Enrolled:  {enrolled_student}</p>
+          <p>Available Seats: <span className="text-green-700"> {available_seats}</span></p>
+          <p>Enrolled: <span  className="text-green-700">  {enrolled_student}</span></p>
           <p className="text-red-400"> Price : <span className="text-xl">${price}</span> </p>
           <div className="card-actions justify-center">
             {

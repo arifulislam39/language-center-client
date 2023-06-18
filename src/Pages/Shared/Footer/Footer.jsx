@@ -2,18 +2,15 @@
 import { ImFacebook2 } from "react-icons/im";
 import { GrInstagram } from "react-icons/gr";
 import { AiFillTwitterSquare } from "react-icons/ai";
+import logo from "../../../assets/images/banner/logo.png"
 
 const Footer = () => {
   return (
     <footer className="bg-[#123821] text-white">
       <div className="footer p-4 md:p-10">
         <div>
-          <p className="btn btn-ghost font-bold mb-4 text-xl md:text-2xl">
-            <span className="text-4xl md:text-6xl text-[rgb(171,141,3)] font-bold">
-              L
-            </span>{" "}
-            ANGUAGE CENTER
-          </p>
+          
+          <img className="-my-14" src={logo} alt="" />
           <p className="ml-2 md:ml-5">1234 Street, Los Angeles, United States</p>
           <div className="flex ml-6 mt-6 md:mt-10 space-x-6 md:space-x-9 text-2xl md:text-3xl">
             <ImFacebook2 />
