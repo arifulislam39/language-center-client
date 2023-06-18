@@ -4,9 +4,8 @@ import { useRef, useState } from "react";
 
 const ManageClasses = () => {
   const [classes, refetch] = useClass();
-  
 
-  //handle approve
+  // handle approve
   const handleApprove = (item) => {
     fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
@@ -31,7 +30,7 @@ const ManageClasses = () => {
       });
   };
 
-  //handle deny
+  // handle deny
   const handleDeny = (item) => {
     fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
@@ -56,7 +55,7 @@ const ManageClasses = () => {
       });
   };
 
-  //feedback modal
+  // feedback modal
   const feedbackModalRef = useRef(null);
   const [item, setFeedback] = useState(null);
 
@@ -66,20 +65,19 @@ const ManageClasses = () => {
       feedbackModalRef.current.showModal();
     }
   };
-  
 
-//feedback submit handler
+  // feedback submit handler
   const handleFeedbackSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const feedback = form.feedback.value;
-  
+
     const update = {
       feedback,
     };
-  
+
     console.log(update);
-  
+
     fetch(`https://language-center-server-nu.vercel.app/classes/${item._id}`, {
       method: "PATCH",
       headers: {
@@ -105,14 +103,12 @@ const ManageClasses = () => {
         console.error("Error:", error);
       });
   };
-  
-
-
-
 
   return (
     <div className="">
-     <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">manage classes</h2>
+      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">
+        manage classes
+      </h2>
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
           {/* head */}
@@ -152,20 +148,31 @@ const ManageClasses = () => {
                 <td className="text-end">${item.price}</td>
                 <td>{item.status}</td>
                 <td>
-                  <button onClick={() => handleApprove(item)} className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]" disabled={item?.status ==="approved" || item?.status ==="denied"}>
+                  <button
+                    onClick={() => handleApprove(item)}
+                    className="btn text-white hover:bg-[#dabd3a] bg-[#123821]"
+                    disabled={
+                      item?.status === "approved" || item?.status === "denied"
+                    }
+                  >
                     Approve
                   </button>
                 </td>
                 <td>
-                  <button onClick={() => handleDeny(item)} className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]" disabled={item?.status ==="approved" || item?.status ==="denied"}>
+                  <button
+                    onClick={() => handleDeny(item)}
+                    className="btn text-white hover:bg-[#dabd3a] bg-[#123821]"
+                    disabled={
+                      item?.status === "approved" || item?.status === "denied"
+                    }
+                  >
                     Deny
                   </button>
                 </td>
                 <td>
-                  {" "}
                   <div>
                     <button
-                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
+                      className="btn text-white hover:bg-[#dabd3a] bg-[#123821]"
                       onClick={() => FeedbackOpenModal(item)}
                     >
                       Feedback
@@ -182,7 +189,11 @@ const ManageClasses = () => {
       <div>
         {item && (
           <dialog ref={feedbackModalRef} className="modal" open>
-            <form onSubmit={handleFeedbackSubmit} method="dialog" className="modal-box">
+            <form
+              onSubmit={handleFeedbackSubmit}
+              method="dialog"
+              className="modal-box"
+            >
               <button
                 htmlFor=""
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -190,16 +201,20 @@ const ManageClasses = () => {
               >
                 ✕
               </button>
-             <div className="text-center"> <h3 className="font-bold text-lg">Feedback</h3>
-              <p className="py-4">
-               Status: {item.class_name}
-              </p>
-              <p className="py-4">
-               Status: {item.status}
-              </p></div>
-            <div className="form-control"> <textarea name="feedback" type="text" className="textarea textarea-bordered w-full" placeholder="Type here....."></textarea></div>
-
-             <div className="form-control mt-6">
+              <div className="text-center">
+                <h3 className="font-bold text-lg">Feedback</h3>
+                <p className="py-4">Status: {item.class_name}</p>
+                <p className="py-4">Status: {item.status}</p>
+              </div>
+              <div className="form-control">
+                <textarea
+                  name="feedback"
+                  type="text"
+                  className="textarea textarea-bordered w-full"
+                  placeholder="Type here....."
+                ></textarea>
+              </div>
+              <div className="form-control mt-6">
                 <input
                   className="btn bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
                   type="submit"

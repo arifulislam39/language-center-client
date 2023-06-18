@@ -3,16 +3,15 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
-  
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get("https://language-center-server-nu.vercel.app/users");
+      const res = await axios.get(
+        "https://language-center-server-nu.vercel.app/users"
+      );
       return res.data;
     },
   });
-
-  
 
   const handleMakeAdmin = (user) => {
     fetch(`https://language-center-server-nu.vercel.app/users/${user._id}`, {
@@ -68,9 +67,9 @@ const ManageUsers = () => {
         manage users
       </h2>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra w-full sm:w-auto">
           {/* head */}
-          <thead className="text-xl">
+          <thead className="text-xl sm:text-base">
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -84,20 +83,20 @@ const ManageUsers = () => {
           <tbody>
             {users.map((user, index) => (
               <tr key={user._id}>
-                <th>{index + 1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+                <th className="whitespace-nowrap">{index + 1}</th>
+                <td className="whitespace-nowrap">{user.name}</td>
+                <td className="whitespace-nowrap">{user.email}</td>
+                <td className="whitespace-nowrap">{user.role}</td>
                 <td>
                   {user.role === "admin" ? (
                     "admin"
                   ) : (
                     <button
                       onClick={() => {
-                        handleMakeAdmin(user)
+                        handleMakeAdmin(user);
                       }}
-                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
-                      disabled={user.role==="admin"}
+                      className="btn text-white hover:bg-[#dabd3a] bg-[#123821] sm:whitespace-nowrap"
+                      disabled={user.role === "admin"}
                     >
                       Make Admin
                     </button>
@@ -109,10 +108,10 @@ const ManageUsers = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        handleMakeInstructor(user)
+                        handleMakeInstructor(user);
                       }}
-                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
-                      disabled={user.role==="instructor"}
+                      className="btn text-white hover:bg-[#dabd3a] bg-[#123821] sm:whitespace-nowrap"
+                      disabled={user.role === "instructor"}
                     >
                       Make Instructor
                     </button>

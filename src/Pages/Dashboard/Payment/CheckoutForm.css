@@ -1,17 +1,4 @@
-/* These styles are used if a demo specific stylesheet is not present */
 
-
-:before,
-:after {
-  box-sizing: border-box;
-}
-
-body,
-html {
-  
-  font-size: 18px;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-}
 
 form {
   max-width: 800px;

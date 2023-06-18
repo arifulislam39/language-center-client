@@ -9,9 +9,9 @@ const Home = () => {
     <div>
       {" "}
       <Banner></Banner>
-      <PopularClasses></PopularClasses>
+       <PopularClasses></PopularClasses>
       <PopularInstructors></PopularInstructors>
-    <Blog></Blog>
+    <Blog></Blog> 
       
     
     </div>

@@ -17,7 +17,7 @@ const MyClasses = () => {
     },
   });
 
-  //view Feedback Modal
+  // view Feedback Modal
   const ViewFeedbackModalRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -28,7 +28,7 @@ const MyClasses = () => {
     }
   };
 
-  //Update modal
+  // Update modal
   const feedbackModalRef = useRef(null);
   const [item, setFeedback] = useState(null);
 
@@ -39,15 +39,14 @@ const MyClasses = () => {
     }
   };
 
-
-  //update class handler
+  // update class handler
   const handleUpdateDataSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const class_name = form.class_name.value;
     const class_image = form.class_image.value;
     const available_seats_string = form.available_seats.value;
-    const available_seats=parseInt(available_seats_string);
+    const available_seats = parseInt(available_seats_string);
     const priceString = form.price.value;
     const price = parseFloat(priceString);
 
@@ -60,13 +59,16 @@ const MyClasses = () => {
 
     console.log(update);
 
-    fetch(`https://language-center-server-nu.vercel.app/updateClass/${item._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(update),
-    })
+    fetch(
+      `https://language-center-server-nu.vercel.app/updateClass/${item._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(update),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -88,7 +90,9 @@ const MyClasses = () => {
 
   return (
     <div>
-     <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">my classes</h2>
+      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">
+        my classes
+      </h2>
 
       <div className="overflow-x-auto w-full">
         <table className="table table-zebra w-full">
@@ -100,10 +104,8 @@ const MyClasses = () => {
               <th>Class Name</th>
               <th>Available Seats</th>
               <th>Price</th>
-
               <th>Status</th>
               <th>Total Enrolled Students</th>
-
               <th>Update</th>
               <th>Feedback</th>
             </tr>
@@ -127,22 +129,20 @@ const MyClasses = () => {
                 <td className="text-end">${item.price}</td>
                 <td>{item.status}</td>
                 <td>{item.enrolled_student}</td>
-
                 <td>
                   <div>
                     <button
-                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
+                      className="btn text-white hover:bg-[#dabd3a] bg-[#123821]"
                       onClick={() => FeedbackOpenModal(item)}
                     >
                       Update
                     </button>
                   </div>
                 </td>
-
                 <td>
                   <div>
                     <button
-                      className="btn text-white hover:bg-[#dabd3a]  bg-[#123821]"
+                      className="btn text-white hover:bg-[#dabd3a] bg-[#123821]"
                       onClick={() => ViewFeedbackOpenModal(item)}
                     >
                       View Feedback
@@ -168,15 +168,15 @@ const MyClasses = () => {
                 ✕
               </button>
               <h3 className="font-bold text-lg">{selectedItem.status}</h3>
-             
-              <p>{selectedItem.feedback}</p>{" "}
+
+              <p>{selectedItem.feedback}</p>
               {/* Display the selected item's feedback */}
             </form>
           </dialog>
         )}
       </div>
       <div>
-        {/* //Update modal */}
+        {/* Update modal */}
         <div>
           {item && (
             <dialog ref={feedbackModalRef} className="modal" open>
@@ -193,7 +193,6 @@ const MyClasses = () => {
                   ✕
                 </button>
                 <div className="text-center">
-                  {" "}
                   <h3 className="font-bold text-lg">Update</h3>
                   <p className="py-4">Class Name: {item.class_name}</p>
                 </div>
@@ -207,7 +206,7 @@ const MyClasses = () => {
                     defaultValue={item.class_name}
                     className="input input-bordered input-primary"
                   />
-                </div>{" "}
+                </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Class Image</span>

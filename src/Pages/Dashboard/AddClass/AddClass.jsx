@@ -7,7 +7,6 @@ const AddClass = () => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
 
-
   const onSubmit = (data) => {
     console.log(data);
     const saveData = {
@@ -16,7 +15,9 @@ const AddClass = () => {
       price: parseFloat(data.price),
       available_seats: parseInt(data.available_seats),
       instructor_name: data.instructor_name,
-      instructor_email: data.instructor_email,status:"pending",enrolled_student:parseInt(0)
+      instructor_email: data.instructor_email,
+      status: "pending",
+      enrolled_student: parseInt(0),
     };
     fetch("https://language-center-server-nu.vercel.app/classes", {
       method: "POST",
@@ -44,94 +45,91 @@ const AddClass = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto mt-10">
-      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">add a class</h2>
-      {/* <ToastContainer className="lg:text-3xl" />
-        <Head title="ADD TOYS"></Head> */}
+    <div className="max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-center mb-6 text-4xl text-[#123821] font-bold uppercase">
+        add a class
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card-body">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Class Name</span>
-              </label>
-              <input
-                name="class_name"
-                {...register("class_name")}
-                type="text"
-                defaultValue=""
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Class Image URL</span>
-              </label>
-              <input
-                name="class_image"
-                {...register("class_image")}
-                type="photo"
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Price</span>
-              </label>
-              <input
-                name="price"
-                {...register("price")}
-                defaultValue=""
-                type="text"
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Available Seats</span>
-              </label>
-              <input
-                name="available_eats"
-                {...register("available_seats")}
-                type="text"
-                defaultValue=""
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Instructor Name</span>
-              </label>
-              <input
-                name="instructor_name"
-                {...register("instructor_name")}
-                type="text"
-                value={user?.displayName}
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Instructor Email</span>
-              </label>
-              <input
-                name="instructor_email"
-                {...register("instructor_email")}
-                type="email"
-                value={user?.email}
-                className="input input-bordered border-[#123821] border-2"
-              />
-            </div>
-          </div>
-
-          <div className="form-control mt-6 ml-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Class Name</span>
+            </label>
             <input
-              // onClick={notify}
-              className="btn  bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
-              type="submit"
-              value="Add"
+              name="class_name"
+              {...register("class_name")}
+              type="text"
+              defaultValue=""
+              className="input input-bordered border-[#123821] border-2"
             />
           </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Class Image URL</span>
+            </label>
+            <input
+              name="class_image"
+              {...register("class_image")}
+              type="photo"
+              className="input input-bordered border-[#123821] border-2"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Price</span>
+            </label>
+            <input
+              name="price"
+              {...register("price")}
+              defaultValue=""
+              type="text"
+              className="input input-bordered border-[#123821] border-2"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Available Seats</span>
+            </label>
+            <input
+              name="available_eats"
+              {...register("available_seats")}
+              type="text"
+              defaultValue=""
+              className="input input-bordered border-[#123821] border-2"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Instructor Name</span>
+            </label>
+            <input
+              name="instructor_name"
+              {...register("instructor_name")}
+              type="text"
+              value={user?.displayName}
+              className="input input-bordered border-[#123821] border-2"
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Instructor Email</span>
+            </label>
+            <input
+              name="instructor_email"
+              {...register("instructor_email")}
+              type="email"
+              value={user?.email}
+              className="input input-bordered border-[#123821] border-2"
+            />
+          </div>
+        </div>
+
+        <div className="form-control mt-6 md:ml-32">
+          <input
+            className="btn bg-[#123821] text-white hover:bg-[#A79132] transition duration-700 ease-in-out"
+            type="submit"
+            value="Add"
+          />
         </div>
       </form>
     </div>

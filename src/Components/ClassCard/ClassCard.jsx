@@ -5,8 +5,6 @@ import axios from "axios";
 const ClassCard = () => {
   const [classes, setClasses] = useState([]);
 
-  //console.log(classes);
-
   useEffect(() => {
     axios
       .get("https://language-center-server-nu.vercel.app/approvedClasses")
@@ -19,19 +17,18 @@ const ClassCard = () => {
         // Handle any errors
         console.error(error);
       });
-  }, [ ]);
+  }, []);
 
   return (
-    <div className="px-20">
-      <div className="">
-        <div className="grid gap-14 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-20 mb-20">
+    
+      <div className="my-24 p-10 md:p-20">
+        <div className="grid gap-6 md:gap-8 lg:gap-14 xl:gap-16 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {classes.map((cls) => (
-            <Card key={cls._id} cls={cls}></Card>
+            <Card key={cls._id} cls={cls} />
           ))}
-          
         </div>
       </div>
-    </div>
+   
   );
 };
 
